@@ -16,8 +16,7 @@ import modules.style_sorter as style_sorter
 import modules.meta_parser
 import args_manager
 import copy
-# from googletrans import Translator
-# translator = Translator() # khởi tạo thư viện dịch thuật
+
 from modules.sdxl_styles import legal_style_names
 from modules.private_logger import get_current_html_path
 from modules.ui_gradio_extensions import reload_javascript
@@ -104,40 +103,14 @@ with shared.gradio_root:
             with gr.Row(elem_classes='type_row'):
                 with gr.Column(scale=17):
                     prompt = gr.Textbox(show_label=False, placeholder="Nhập yêu cầu ở đây hoặc dán tham số...", elem_id='positive_prompt',
-                                        container=False, autofocus=True, elem_classes='type_row', lines=1024, value='mèo')
-                    
+                                        container=False, autofocus=True, elem_classes='type_row', lines=1024, value='anh em')
+
                     default_prompt = modules.config.default_prompt
                     if isinstance(default_prompt, str) and default_prompt != '':
                         shared.gradio_root.load(lambda: default_prompt, outputs=prompt)
 
                 with gr.Column(scale=3, min_width=0):
-
-                    # Hàm xử lý sự kiện khi click vào nút "Tạo ảnh"
-                    def handle_generate_button():
-                        from googletrans import Translator
-
-                        # Giả sử 'prompt_viet' được định nghĩa ở một nơi nào đó trong mã của bạn
-                        prompt_viet = "Văn bản tiếng Việt của bạn ở đây"
-
-                        translator = Translator()
-
-                        try:
-                            translated_text = translator.translate(prompt_viet, src='vi', dest='en')
-                            
-                            # Kiểm tra xem translated_text có giá trị không
-                            if translated_text:
-                                print("Văn bản đã dịch:", translated_text.text)
-                            else:
-                                print("Không thể dịch văn bản.")
-                        except Exception as e:
-                            print("Lỗi trong quá trình dịch:", str(e))
-                            # Xử lý lỗi theo cách bạn muốn
-
-                        # Tiếp tục với phần còn lại của mã của bạn...
-
-
                     generate_button = gr.Button(label="Tạo ảnh", value="Tạo ảnh", elem_classes='type_row', elem_id='generate_button', visible=True)
-                    generate_button.click(handle_generate_button)
                     load_parameter_button = gr.Button(label="Cài dặt thông số", value="Load Parameters", elem_classes='type_row', elem_id='load_parameter_button', visible=False)
                     skip_button = gr.Button(label="Bỏ qua", value="Bỏ qua", elem_classes='type_row_half', visible=False)
                     stop_button = gr.Button(label="Dừng lại", value="Dừng", elem_classes='type_row_half', elem_id='stop_button', visible=False)
@@ -586,14 +559,14 @@ with shared.gradio_root:
             load_parameter_button
         ] + lora_ctrls, queue=False, show_progress=False)
 
-        # generate_button.click(lambda: (handle_generate_button(), gr.update(visible=True, interactive=True), gr.update(visible=True, interactive=True), gr.update(visible=False, interactive=False), [], True),
-        #                       outputs=[stop_button, skip_button, generate_button, gallery, state_is_generating]) \
-        #     .then(fn=refresh_seed, inputs=[seed_random, image_seed], outputs=image_seed) \
-        #     .then(advanced_parameters.set_all_advanced_parameters, inputs=adps) \
-        #     .then(fn=generate_clicked, inputs=ctrls, outputs=[progress_html, progress_window, progress_gallery, gallery]) \
-        #     .then(lambda: (gr.update(visible=True, interactive=True), gr.update(visible=False, interactive=False), gr.update(visible=False, interactive=False), False),
-        #           outputs=[generate_button, stop_button, skip_button, state_is_generating]) \
-        #     .then(fn=lambda: None, _js='playNotification').then(fn=lambda: None, _js='refresh_grid_delayed')
+        generate_button.click(lambda: (gr.update(visible=True, interactive=True), gr.update(visible=True, interactive=True), gr.update(visible=False, interactive=False), [], True),
+                              outputs=[stop_button, skip_button, generate_button, gallery, state_is_generating]) \
+            .then(fn=refresh_seed, inputs=[seed_random, image_seed], outputs=image_seed) \
+            .then(advanced_parameters.set_all_advanced_parameters, inputs=adps) \
+            .then(fn=generate_clicked, inputs=ctrls, outputs=[progress_html, progress_window, progress_gallery, gallery]) \
+            .then(lambda: (gr.update(visible=True, interactive=True), gr.update(visible=False, interactive=False), gr.update(visible=False, interactive=False), False),
+                  outputs=[generate_button, stop_button, skip_button, state_is_generating]) \
+            .then(fn=lambda: None, _js='playNotification').then(fn=lambda: None, _js='refresh_grid_delayed')
 
         for notification_file in ['notification.ogg', 'notification.mp3']:
             if os.path.exists(notification_file):
