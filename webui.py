@@ -35,7 +35,7 @@ def generate_clicked(*args):
     task = worker.AsyncTask(args=list(args))
     finished = False
 
-    yield gr.update(visible=True, value=modules.html.make_progress_html(1, 'Waiting for task to start ...')), \
+    yield gr.update(visible=True, value=modules.html.make_progress_html(1, 'Chờ nhiệm vụ bắt đầu...')), \
         gr.update(visible=True, value=None), \
         gr.update(visible=False, value=None), \
         gr.update(visible=False)
@@ -112,8 +112,8 @@ with shared.gradio_root:
                 with gr.Column(scale=3, min_width=0):
                     generate_button = gr.Button(label="Tạo ảnh", value="Tạo ảnh", elem_classes='type_row', elem_id='generate_button', visible=True)
                     load_parameter_button = gr.Button(label="Cài dặt thông số", value="Load Parameters", elem_classes='type_row', elem_id='load_parameter_button', visible=False)
-                    skip_button = gr.Button(label="Bỏ qua", value="Skip", elem_classes='type_row_half', visible=False)
-                    stop_button = gr.Button(label="Dừng lại", value="Stop", elem_classes='type_row_half', elem_id='stop_button', visible=False)
+                    skip_button = gr.Button(label="Bỏ qua", value="Bỏ qua", elem_classes='type_row_half', visible=False)
+                    stop_button = gr.Button(label="Dừng lại", value="Dừng", elem_classes='type_row_half', elem_id='stop_button', visible=False)
 
                     def stop_clicked():
                         import ldm_patched.modules.model_management as model_management
@@ -191,7 +191,7 @@ with shared.gradio_root:
                             inpaint_mode = gr.Dropdown(choices=modules.flags.inpaint_options, value=modules.flags.inpaint_option_default, label='Phương pháp')
                         example_inpaint_prompts = gr.Dataset(samples=modules.config.example_inpaint_prompts, label='Danh sách Yêu Cầu Bổ Sung Nhanh', components=[inpaint_additional_prompt], visible=False)
                         example_inpaint_prompts.click(lambda x: x[0], inputs=example_inpaint_prompts, outputs=inpaint_additional_prompt, show_progress=False, queue=False)
-                    with gr.TabItem(label='Mô tả') as desc_tab:
+                    with gr.TabItem(label='Mô tả ảnh') as desc_tab:
                         with gr.Row():
                             with gr.Column():
                                 desc_input_image = grh.Image(label='Kéo bất kỳ ảnh nào đến đây', source='upload', type='numpy')
@@ -250,7 +250,7 @@ with shared.gradio_root:
 
                 if not args_manager.args.disable_image_log:
                      print('a')
-            with gr.Tab(label='styles'):
+            with gr.Tab(label='Phong cách'):
                 style_sorter.try_load_sorted_styles(
                     style_names=legal_style_names,
                     default_selected=modules.config.default_styles)
@@ -283,7 +283,7 @@ with shared.gradio_root:
                                                        show_progress=False).then(
                     lambda: None, _js='()=>{refresh_style_localization();}')
 
-            with gr.Tab(label='Model'):
+            with gr.Tab(label='Mô hình'):
                 with gr.Group():
                     with gr.Row():
                         base_model = gr.Dropdown(label='Mô hình Cơ bản (chỉ áp dụng cho SDXL)', choices=modules.config.model_filenames, value=modules.config.default_base_model_name, show_label=True)
