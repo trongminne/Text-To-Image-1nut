@@ -295,7 +295,7 @@ with shared.gradio_root:
                                              info = 'Sử dụng 0.4 cho mô hình thực tế SD1.5; ' 
                                                        'hoặc 0.667 cho mô hình anime SD1.5; ' 
                                                        'hoặc 0.8 cho XL-refiners; '
-                                                       'hoặc bất kỳ giá trị nào để chuyển đổi hai mô hình SDXL.',
+                                                       'hoặc bất kỳ giá trị nào để chuyển đổi hai mô hình SDXL',
                                                value=modules.config.default_refiner_switch,
                                                visible=modules.config.default_refiner_model_name != 'None')
 
