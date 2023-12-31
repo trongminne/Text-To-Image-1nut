@@ -118,7 +118,7 @@ with shared.gradio_root:
                     )
 
                     # Lấy giá trị nhập vào từ Textbox
-                    input_text = input(prompt_input.placeholder)
+                    input_text = input(prompt_input.value)
 
                     # Dịch văn bản từ tiếng Việt sang tiếng Anh và gán vào biến prompt
                     prompt = translator.translate(input_text, dest='en').text
