@@ -114,12 +114,12 @@ with shared.gradio_root:
 
                     # Hàm xử lý sự kiện khi click vào nút "Tạo ảnh"
                     def handle_generate_button():
-                        # Dịch văn bản từ tiếng Việt sang tiếng Anh
-                        translated_text = translator.translate(prompt.value, src='vi', dest='en').text
-                        # Cập nhật giá trị của prompt sau khi dịch xong
-                        print(translated_text)
-                        prompt.value = translated_text
-
+                        # # Dịch văn bản từ tiếng Việt sang tiếng Anh
+                        # translated_text = translator.translate(prompt.value, src='vi', dest='en').text
+                        # # Cập nhật giá trị của prompt sau khi dịch xong
+                        # print(translated_text)
+                        # prompt.value = translated_text
+                        print(prompt.value)
 
                     generate_button = gr.Button(label="Tạo ảnh", value="Tạo ảnh", elem_classes='type_row', elem_id='generate_button', visible=True,  onClick=handle_generate_button)
                     generate_button.click(handle_generate_button)
