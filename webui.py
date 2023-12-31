@@ -121,7 +121,8 @@ with shared.gradio_root:
                         print(translated_text)
                         prompt.value = translated_text
 
-                    # Gán hàm xử lý sự kiện cho nút "Tạo ảnh"
+                    # Kết nối sự kiện khi click vào nút "Tạo ảnh"
+                    generate_button.clip_layer(handle_generate_button)
 
                     load_parameter_button = gr.Button(label="Cài dặt thông số", value="Load Parameters", elem_classes='type_row', elem_id='load_parameter_button', visible=False)
                     skip_button = gr.Button(label="Bỏ qua", value="Bỏ qua", elem_classes='type_row_half', visible=False)
