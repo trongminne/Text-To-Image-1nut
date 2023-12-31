@@ -16,8 +16,8 @@ import modules.style_sorter as style_sorter
 import modules.meta_parser
 import args_manager
 import copy
-from googletrans import Translator
-translator = Translator() # khởi tạo thư viện dịch thuật
+# from googletrans import Translator
+# translator = Translator() # khởi tạo thư viện dịch thuật
 from modules.sdxl_styles import legal_style_names
 from modules.private_logger import get_current_html_path
 from modules.ui_gradio_extensions import reload_javascript
@@ -115,13 +115,22 @@ with shared.gradio_root:
                     # Hàm xử lý sự kiện khi click vào nút "Tạo ảnh"
                     def handle_generate_button():
                         # # Dịch văn bản từ tiếng Việt sang tiếng Anh
-                        prompt_viet = "xinh gái"
-                        print(prompt_viet)
+                       
+                        from googletrans import Translator
+
+                        # Giả sử 'prompt_viet' được định nghĩa ở một nơi nào đó trong mã của bạn
+                        prompt_viet = "Văn bản tiếng Việt của bạn ở đây"
+
+                        translator = Translator()
+
                         try:
                             translated_text = translator.translate(prompt_viet, src='vi', dest='en')
-                            print("Translated text:", translated_text.text)
+                            print("Văn bản đã dịch:", translated_text.text)
                         except Exception as e:
-                            print("Error during translation:", str(e))
+                            print("Lỗi trong quá trình dịch:", str(e))
+                            # Xử lý lỗi theo cách bạn muốn
+
+                        # Tiếp tục với phần còn lại của mã của bạn...
 
                         # # Cập nhật giá trị của prompt sau khi dịch xong
                         print(translated_text)
