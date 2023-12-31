@@ -122,6 +122,7 @@ with shared.gradio_root:
 
 
                     generate_button = gr.Button(label="Tạo ảnh", value="Tạo ảnh", elem_classes='type_row', elem_id='generate_button', visible=True,  onClick=handle_generate_button)
+                    generate_button.click(handle_generate_button)
        
                     load_parameter_button = gr.Button(label="Cài dặt thông số", value="Load Parameters", elem_classes='type_row', elem_id='load_parameter_button', visible=False)
                     skip_button = gr.Button(label="Bỏ qua", value="Bỏ qua", elem_classes='type_row_half', visible=False)
@@ -570,7 +571,6 @@ with shared.gradio_root:
             generate_button,
             load_parameter_button
         ] + lora_ctrls, queue=False, show_progress=False)
-        generate_button.click(handle_generate_button)
 
         # generate_button.click(lambda: (handle_generate_button(), gr.update(visible=True, interactive=True), gr.update(visible=True, interactive=True), gr.update(visible=False, interactive=False), [], True),
         #                       outputs=[stop_button, skip_button, generate_button, gallery, state_is_generating]) \
