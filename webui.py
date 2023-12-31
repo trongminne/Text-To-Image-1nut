@@ -249,7 +249,7 @@ with shared.gradio_root:
                                    queue=False, show_progress=False)
 
                 if not args_manager.args.disable_image_log:
-
+                     print('a')
             with gr.Tab(label='styles'):
                 style_sorter.try_load_sorted_styles(
                     style_names=legal_style_names,
