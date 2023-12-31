@@ -18,12 +18,12 @@ import args_manager
 import copy
 from translate import Translator
 
+translator = Translator(to_lang='en') # khởi tạo thư viện dịch thuật
 from modules.sdxl_styles import legal_style_names
 from modules.private_logger import get_current_html_path
 from modules.ui_gradio_extensions import reload_javascript
 from modules.auth import auth_enabled, check_auth
 
-translator = Translator(to_lang='en') # khởi tạo thư viện dịch thuật
 
 def generate_clicked(*args):
     import ldm_patched.modules.model_management as model_management
@@ -104,11 +104,18 @@ with shared.gradio_root:
                                  elem_id='final_gallery')
             with gr.Row(elem_classes='type_row'):
                 with gr.Column(scale=17):
-                    input_text = gr.Textbox(show_label=False, placeholder="Tiếng việt...", elem_id='positive_prompt',
-                                        container=False, autofocus=True, elem_classes='type_row', lines=1024)
-                    prompt_input = translator.translate(input_text.value)
-                    prompt = gr.Textbox(show_label=False, placeholder="Tiếng anh...", elem_id='positive_prompt',
-                                        container=False, autofocus=True, elem_classes='type_row', lines=1024, value=prompt_input)
+                    prompt = gr.Textbox(show_label=False, placeholder="Nhập yêu cầu ở đây hoặc dán tham số...", elem_id='positive_prompt',
+                                        container=False, autofocus=True, elem_classes='type_row', lines=1024, value='mèo')
+                    # Hàm xử lý sự kiện khi click vào nút "Tạo ảnh"
+                    def handle_generate_button():
+                        # Dịch văn bản từ tiếng Việt sang tiếng Anh
+                        translated_text = translator.translate(prompt.value)
+                        # Cập nhật giá trị của prompt sau khi dịch xong
+                        prompt.value = translated_text
+
+                    # Gán hàm xử lý sự kiện cho nút "Tạo ảnh"
+                    generate_button.click(handle_generate_button)
+
                     default_prompt = modules.config.default_prompt
                     if isinstance(default_prompt, str) and default_prompt != '':
                         shared.gradio_root.load(lambda: default_prompt, outputs=prompt)
