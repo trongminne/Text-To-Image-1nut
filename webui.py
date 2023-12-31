@@ -16,7 +16,8 @@ import modules.style_sorter as style_sorter
 import modules.meta_parser
 import args_manager
 import copy
-
+from googletrans import Translator
+translator = Translator() # khởi tạo thư viện dịch thuật
 from modules.sdxl_styles import legal_style_names
 from modules.private_logger import get_current_html_path
 from modules.ui_gradio_extensions import reload_javascript
@@ -103,14 +104,27 @@ with shared.gradio_root:
             with gr.Row(elem_classes='type_row'):
                 with gr.Column(scale=17):
                     prompt = gr.Textbox(show_label=False, placeholder="Nhập yêu cầu ở đây hoặc dán tham số...", elem_id='positive_prompt',
-                                        container=False, autofocus=True, elem_classes='type_row', lines=1024, value='anh em')
-
+                                        container=False, autofocus=True, elem_classes='type_row', lines=1024, value='mèo')
+                    
                     default_prompt = modules.config.default_prompt
                     if isinstance(default_prompt, str) and default_prompt != '':
                         shared.gradio_root.load(lambda: default_prompt, outputs=prompt)
 
                 with gr.Column(scale=3, min_width=0):
                     generate_button = gr.Button(label="Tạo ảnh", value="Tạo ảnh", elem_classes='type_row', elem_id='generate_button', visible=True)
+                    
+                    # Hàm xử lý sự kiện khi click vào nút "Tạo ảnh"
+                    def handle_generate_button():
+                        # Dịch văn bản từ tiếng Việt sang tiếng Anh
+                        translated_text = translator.translate(prompt.value, src='vi', dest='en').text
+                        # Cập nhật giá trị của prompt sau khi dịch xong
+                        print(translated_text)
+                        prompt.value = translated_text
+
+                    # Gán hàm xử lý sự kiện cho nút "Tạo ảnh"
+                    generate_button.click(handle_generate_button)
+
+
                     load_parameter_button = gr.Button(label="Cài dặt thông số", value="Load Parameters", elem_classes='type_row', elem_id='load_parameter_button', visible=False)
                     skip_button = gr.Button(label="Bỏ qua", value="Bỏ qua", elem_classes='type_row_half', visible=False)
                     stop_button = gr.Button(label="Dừng lại", value="Dừng", elem_classes='type_row_half', elem_id='stop_button', visible=False)
