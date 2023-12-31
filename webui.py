@@ -119,6 +119,7 @@ with shared.gradio_root:
                         # Dịch văn bản từ tiếng Việt sang tiếng Anh
                         translated_text = translator.translate(prompt.value)
                         # Cập nhật giá trị của prompt sau khi dịch xong
+                        print(translated_text)
                         prompt.value = translated_text
 
                     # Gán hàm xử lý sự kiện cho nút "Tạo ảnh"
