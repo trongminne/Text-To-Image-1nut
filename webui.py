@@ -16,6 +16,8 @@ import modules.style_sorter as style_sorter
 import modules.meta_parser
 import args_manager
 import copy
+from googletrans import Translator
+translator = Translator() # khởi tạo thư viện dịch thuật
 
 from modules.sdxl_styles import legal_style_names
 from modules.private_logger import get_current_html_path
@@ -102,9 +104,9 @@ with shared.gradio_root:
                                  elem_id='final_gallery')
             with gr.Row(elem_classes='type_row'):
                 with gr.Column(scale=17):
-                    prompt = gr.Textbox(show_label=False, placeholder="Nhập yêu cầu ở đây hoặc dán tham số...", elem_id='positive_prompt',
+                    prompt_input = gr.Textbox(show_label=False, placeholder="Nhập yêu cầu ở đây hoặc dán tham số...", elem_id='positive_prompt',
                                         container=False, autofocus=True, elem_classes='type_row', lines=1024)
-
+                    prompt = translator.translate(prompt_input[0], src='vi', dest='en').text # dịch tiếng việt sang anh
                     default_prompt = modules.config.default_prompt
                     if isinstance(default_prompt, str) and default_prompt != '':
                         shared.gradio_root.load(lambda: default_prompt, outputs=prompt)
