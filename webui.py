@@ -110,7 +110,7 @@ with shared.gradio_root:
                         shared.gradio_root.load(lambda: default_prompt, outputs=prompt)
 
                 with gr.Column(scale=3, min_width=0):
-                    generate_button = gr.Button(label="Tạo ảnh", value="Generate", elem_classes='type_row', elem_id='generate_button', visible=True)
+                    generate_button = gr.Button(label="Tạo ảnh", value="Tạo ảnh", elem_classes='type_row', elem_id='generate_button', visible=True)
                     load_parameter_button = gr.Button(label="Cài dặt thông số", value="Load Parameters", elem_classes='type_row', elem_id='load_parameter_button', visible=False)
                     skip_button = gr.Button(label="Bỏ qua", value="Skip", elem_classes='type_row_half', visible=False)
                     stop_button = gr.Button(label="Dừng lại", value="Stop", elem_classes='type_row_half', elem_id='stop_button', visible=False)
@@ -141,7 +141,6 @@ with shared.gradio_root:
                                 uov_input_image = grh.Image(label='Kéo ảnh ở trên đây', source='upload', type='numpy')
                             with gr.Column():
                                 uov_method = gr.Radio(label='Mở rộng kích thước hoặc Biến thể:', choices=flags.uov_list, value=flags.disabled)
-                                gr.HTML('<a href="https://github.com/lllyasviel/Fooocus/discussions/390" target="_blank">\U0001F4D4 Document</a>')
                     with gr.TabItem(label='Gợi ý hình ảnh') as ip_tab:
                         with gr.Row():
                             ip_images = []
@@ -201,7 +200,7 @@ with shared.gradio_root:
                                     label='Content Type',
                                     choices=[flags.desc_type_photo, flags.desc_type_anime],
                                     value=flags.desc_type_photo)
-                                desc_btn = gr.Button(value='Describe this Image into Prompt')
+                                desc_btn = gr.Button(value='Mô tả hình ảnh này thành câu gợi ý.')
             switch_js = "(x) => {if(x){viewer_to_bottom(100);viewer_to_bottom(500);}else{viewer_to_top();} return x;}"
             down_js = "() => {viewer_to_bottom();}"
 
@@ -250,7 +249,6 @@ with shared.gradio_root:
                                    queue=False, show_progress=False)
 
                 if not args_manager.args.disable_image_log:
-                    gr.HTML(f'<a href="/file={get_current_html_path()}" target="_blank">\U0001F4DA Lịch sử bản ghi</a>')
 
             with gr.Tab(label='Phong cách'):
                 style_sorter.try_load_sorted_styles(
@@ -314,112 +312,114 @@ with shared.gradio_root:
                             lora_ctrls += [lora_model, lora_weight]
 
                 with gr.Row():
-                    model_refresh = gr.Button(label='Refresh', value='\U0001f504 Refresh All Files', variant='secondary', elem_classes='refresh_button')
-            with gr.Tab(label='Advanced'):
-                guidance_scale = gr.Slider(label='Guidance Scale', minimum=1.0, maximum=30.0, step=0.01,
+                    model_refresh = gr.Button(label='Làm mới', value='\U0001f504 Refresh All Files', variant='secondary', elem_classes='refresh_button')
+            with gr.Tab(label='Nâng cao'):
+                guidance_scale = gr.Slider(label='Tỉ lệ Hướng dẫn', minimum=1.0, maximum=30.0, step=0.01,
                                            value=modules.config.default_cfg_scale,
-                                           info='Higher value means style is cleaner, vivider, and more artistic.')
-                sharpness = gr.Slider(label='Image Sharpness', minimum=0.0, maximum=30.0, step=0.001,
+                                           info='Giá trị cao đồng nghĩa với phong cách sẽ sáng sủa hơn, sống động hơn và nghệ thuật hơn.')
+                sharpness = gr.Slider(label='Độ sắc nét của ảnh', minimum=0.0, maximum=30.0, step=0.001,
                                       value=modules.config.default_sample_sharpness,
-                                      info='Higher value means image and texture are sharper.')
-                gr.HTML('<a href="https://github.com/lllyasviel/Fooocus/discussions/117" target="_blank">\U0001F4D4 Document</a>')
-                dev_mode = gr.Checkbox(label='Developer Debug Mode', value=False, container=False)
+                                      info='"Giá trị cao đồng nghĩa với hình ảnh và cấu trúc sẽ rõ nét hơn.')
+                dev_mode = gr.Checkbox(label='Chế độ Debug của Nhà phát triển', value=False, container=False)
 
                 with gr.Column(visible=False) as dev_tools:
                     with gr.Tab(label='Debug Tools'):
-                        adm_scaler_positive = gr.Slider(label='Positive ADM Guidance Scaler', minimum=0.1, maximum=3.0,
-                                                        step=0.001, value=1.5, info='The scaler multiplied to positive ADM (use 1.0 to disable). ')
-                        adm_scaler_negative = gr.Slider(label='Negative ADM Guidance Scaler', minimum=0.1, maximum=3.0,
-                                                        step=0.001, value=0.8, info='The scaler multiplied to negative ADM (use 1.0 to disable). ')
-                        adm_scaler_end = gr.Slider(label='ADM Guidance End At Step', minimum=0.0, maximum=1.0,
+                        adm_scaler_positive = gr.Slider(label='Bộ điều chỉnh hướng dẫn ADM tích cực', minimum=0.1, maximum=3.0,
+                                                        step=0.001, value=1.5, info='Hệ số nhân vào ADM tích cực (sử dụng 1.0 để tắt).')
+                        adm_scaler_negative = gr.Slider(label='Bộ điều chỉnh hướng dẫn ADM tiêu cực', minimum=0.1, maximum=3.0,
+                                                        step=0.001, value=0.8, info='Hệ số nhân vào ADM tiêu cực (sử dụng 1.0 để tắt).')
+                        adm_scaler_end = gr.Slider(label='Kết thúc Hướng dẫn ADM tại Bước', minimum=0.0, maximum=1.0,
                                                    step=0.001, value=0.3,
-                                                   info='When to end the guidance from positive/negative ADM. ')
-
-                        refiner_swap_method = gr.Dropdown(label='Refiner swap method', value='joint',
+                                                   info='Khi nào kết thúc hướng dẫn từ ADM tích cực/tiêu cực.')
+                        
+                        refiner_swap_method = gr.Dropdown(label='Phương pháp đổi Mô hình Tinh chỉnh', value='joint',
                                                           choices=['joint', 'separate', 'vae'])
-
-                        adaptive_cfg = gr.Slider(label='CFG Mimicking from TSNR', minimum=1.0, maximum=30.0, step=0.01,
+                        
+                        adaptive_cfg = gr.Slider(label='CFG Mô phỏng từ TSNR', minimum=1.0, maximum=30.0, step=0.01,
                                                  value=modules.config.default_cfg_tsnr,
-                                                 info='Enabling Fooocus\'s implementation of CFG mimicking for TSNR '
-                                                      '(effective when real CFG > mimicked CFG).')
+                                                 info='Kích hoạt việc mô phỏng CFG từ TSNR '
+                                                      '(hiệu quả khi CFG thực > CFG mô phỏng).')
                         sampler_name = gr.Dropdown(label='Sampler', choices=flags.sampler_list,
                                                    value=modules.config.default_sampler)
                         scheduler_name = gr.Dropdown(label='Scheduler', choices=flags.scheduler_list,
                                                      value=modules.config.default_scheduler)
-
-                        generate_image_grid = gr.Checkbox(label='Generate Image Grid for Each Batch',
-                                                          info='(Experimental) This may cause performance problems on some computers and certain internet conditions.',
+                        
+                        generate_image_grid = gr.Checkbox(label='Tạo lưới ảnh cho mỗi Batch',
+                                                          info='(Thử nghiệm) Điều này có thể gây ra vấn đề về hiệu suất trên một số máy tính và điều kiện internet cụ thể.',
                                                           value=False)
-
-                        overwrite_step = gr.Slider(label='Forced Overwrite of Sampling Step',
+                        
+                        overwrite_step = gr.Slider(label='Ghi đè bước Lấy mẫu',
                                                    minimum=-1, maximum=200, step=1,
                                                    value=modules.config.default_overwrite_step,
-                                                   info='Set as -1 to disable. For developer debugging.')
-                        overwrite_switch = gr.Slider(label='Forced Overwrite of Refiner Switch Step',
+                                                   info='Đặt là -1 để tắt. Dành cho việc debug của nhà phát triển.')
+                        overwrite_switch = gr.Slider(label='Ghi đè bước Chuyển đổi Mô hình Tinh chỉnh',
                                                      minimum=-1, maximum=200, step=1,
                                                      value=modules.config.default_overwrite_switch,
-                                                     info='Set as -1 to disable. For developer debugging.')
-                        overwrite_width = gr.Slider(label='Forced Overwrite of Generating Width',
+                                                     info='Đặt là -1 để tắt. Dành cho việc debug của nhà phát triển.')
+                        overwrite_width = gr.Slider(label='Ghi đè chiều rộng tạo ra',
                                                     minimum=-1, maximum=2048, step=1, value=-1,
-                                                    info='Set as -1 to disable. For developer debugging. '
-                                                         'Results will be worse for non-standard numbers that SDXL is not trained on.')
-                        overwrite_height = gr.Slider(label='Forced Overwrite of Generating Height',
+                                                    info='Đặt là -1 để tắt. Dành cho việc debug của nhà phát triển. '
+                                                         'Kết quả sẽ kém hơn đối với các số không tiêu chuẩn mà SDXL không được đào tạo.')
+                        overwrite_height = gr.Slider(label='Ghi đè chiều cao tạo ra',
                                                      minimum=-1, maximum=2048, step=1, value=-1,
-                                                     info='Set as -1 to disable. For developer debugging. '
-                                                          'Results will be worse for non-standard numbers that SDXL is not trained on.')
-                        overwrite_vary_strength = gr.Slider(label='Forced Overwrite of Denoising Strength of "Vary"',
-                                                            minimum=-1, maximum=1.0, step=0.001, value=-1,
-                                                            info='Set as negative number to disable. For developer debugging.')
-                        overwrite_upscale_strength = gr.Slider(label='Forced Overwrite of Denoising Strength of "Upscale"',
-                                                               minimum=-1, maximum=1.0, step=0.001, value=-1,
-                                                               info='Set as negative number to disable. For developer debugging.')
-                        disable_preview = gr.Checkbox(label='Disable Preview', value=False,
-                                                      info='Disable preview during generation.')
+                                                     info='Đặt là -1 để tắt. Dành cho việc debug của nhà phát triển. '
+                                                          'Kết quả sẽ kém hơn đối với các số không tiêu chuẩn mà SDXL không được đào tạo.')
+                        overwrite_vary_strength = gr.Slider(label='Ghi đè sức mạnh làm sạch của "Vary"',
+                                                           minimum=-1, maximum=1.0, step=0.001, value=-1,
+                                                           info='Đặt là số âm để tắt. Dành cho việc debug của nhà phát triển.')
+                        overwrite_upscale_strength = gr.Slider(label='Ghi đè sức mạnh làm sạch của "Upscale"',
+                                                              minimum=-1, maximum=1.0, step=0.001, value=-1,
+                                                              info='Đặt là số âm để tắt. Dành cho việc debug của nhà phát triển.')
+                        disable_preview = gr.Checkbox(label='Tắt Xem trước', value=False,
+                                                      info='Tắt xem trước trong quá trình tạo ra.')
 
-                    with gr.Tab(label='Control'):
-                        debugging_cn_preprocessor = gr.Checkbox(label='Debug Preprocessors', value=False,
-                                                                info='See the results from preprocessors.')
-                        skipping_cn_preprocessor = gr.Checkbox(label='Skip Preprocessors', value=False,
-                                                               info='Do not preprocess images. (Inputs are already canny/depth/cropped-face/etc.)')
 
-                        mixing_image_prompt_and_vary_upscale = gr.Checkbox(label='Mixing Image Prompt and Vary/Upscale',
-                                                                           value=False)
-                        mixing_image_prompt_and_inpaint = gr.Checkbox(label='Mixing Image Prompt and Inpaint',
-                                                                      value=False)
-
-                        controlnet_softness = gr.Slider(label='Softness of ControlNet', minimum=0.0, maximum=1.0,
+                    with gr.Tab(label='Điều khiển'):
+                        debugging_cn_preprocessor = gr.Checkbox(label='Chế độ Debug của Bộ tiền xử lý', value=False,
+                                                info='Xem kết quả từ bộ tiền xử lý.')
+                        skipping_cn_preprocessor = gr.Checkbox(label='Bỏ qua Bộ tiền xử lý', value=False,
+                                                               info='Không tiền xử lý ảnh. (Dữ liệu đầu vào đã được xử lý Canny/Depth/Cropped-face, v.v.)')
+                        
+                        mixing_image_prompt_and_vary_upscale = gr.Checkbox(label='Kết hợp Hình ảnh Hướng dẫn và Vary/Upscale',
+                                                                            value=False)
+                        mixing_image_prompt_and_inpaint = gr.Checkbox(label='Kết hợp Hình ảnh Hướng dẫn và Inpaint',
+                                                                       value=False)
+                        
+                        controlnet_softness = gr.Slider(label='Độ mềm mại của ControlNet', minimum=0.0, maximum=1.0,
                                                         step=0.001, value=0.25,
-                                                        info='Similar to the Control Mode in A1111 (use 0.0 to disable). ')
+                                                        info='Tương tự Chế độ Kiểm soát trong A1111 (sử dụng 0.0 để tắt).')
+                
 
-                        with gr.Tab(label='Canny'):
-                            canny_low_threshold = gr.Slider(label='Canny Low Threshold', minimum=1, maximum=255,
-                                                            step=1, value=64)
-                            canny_high_threshold = gr.Slider(label='Canny High Threshold', minimum=1, maximum=255,
-                                                             step=1, value=128)
+                    with gr.Tab(label='Canny'):
+                        canny_low_threshold = gr.Slider(label='Ngưỡng thấp Canny', minimum=1, maximum=255,
+                                                        step=1, value=64)
+                        canny_high_threshold = gr.Slider(label='Ngưỡng cao Canny', minimum=1, maximum=255,
+                                                         step=1, value=128)
+                    
 
-                    with gr.Tab(label='Inpaint'):
-                        debugging_inpaint_preprocessor = gr.Checkbox(label='Debug Inpaint Preprocessing', value=False)
-                        inpaint_disable_initial_latent = gr.Checkbox(label='Disable initial latent in inpaint', value=False)
-                        inpaint_engine = gr.Dropdown(label='Inpaint Engine',
+                    with gr.Tab(label='Tái tạo hình ảnh'):
+                        debugging_inpaint_preprocessor = gr.Checkbox(label='Chế độ Debug của Bộ tiền xử lý Tái tạo hình ảnh', value=False)
+                        inpaint_disable_initial_latent = gr.Checkbox(label='Tắt biểu diễn ban đầu trong Tái tạo hình ảnh', value=False)
+                        inpaint_engine = gr.Dropdown(label='Bộ máy Tái tạo hình ảnh',
                                                      value=modules.config.default_inpaint_engine_version,
                                                      choices=flags.inpaint_engine_versions,
-                                                     info='Version of Fooocus inpaint model')
-                        inpaint_strength = gr.Slider(label='Inpaint Denoising Strength',
+                                                     info='Phiên bản của mô hình Tái tạo hình ảnh của Fooocus')
+                        inpaint_strength = gr.Slider(label='Sức mạnh làm sạch Tái tạo hình ảnh',
                                                      minimum=0.0, maximum=1.0, step=0.001, value=1.0,
-                                                     info='Same as the denoising strength in A1111 inpaint. '
-                                                          'Only used in inpaint, not used in outpaint. '
-                                                          '(Outpaint always use 1.0)')
-                        inpaint_respective_field = gr.Slider(label='Inpaint Respective Field',
+                                                     info='Giống như sức mạnh làm sạch trong A1111 Tái tạo hình ảnh. '
+                                                          'Chỉ sử dụng trong Tái tạo hình ảnh, không sử dụng trong Outpaint. '
+                                                          '(Outpaint luôn sử dụng 1.0)')
+                        inpaint_respective_field = gr.Slider(label='Lĩnh vực tương ứng Tái tạo hình ảnh',
                                                              minimum=0.0, maximum=1.0, step=0.001, value=0.618,
-                                                             info='The area to inpaint. '
-                                                                  'Value 0 is same as "Only Masked" in A1111. '
-                                                                  'Value 1 is same as "Whole Image" in A1111. '
-                                                                  'Only used in inpaint, not used in outpaint. '
-                                                                  '(Outpaint always use 1.0)')
+                                                             info='Khu vực cần Tái tạo hình ảnh. '
+                                                                  'Giá trị 0 tương đương với "Chỉ Mask" trong A1111. '
+                                                                  'Giá trị 1 tương đương với "Toàn bức ảnh" trong A1111. '
+                                                                  'Chỉ sử dụng trong Inpaint, không sử dụng trong Outpaint. '
+                                                                  '(Outpaint luôn sử dụng 1.0)')
                         inpaint_ctrls = [debugging_inpaint_preprocessor, inpaint_disable_initial_latent, inpaint_engine, inpaint_strength, inpaint_respective_field]
 
                     with gr.Tab(label='FreeU'):
-                        freeu_enabled = gr.Checkbox(label='Enabled', value=False)
+                        freeu_enabled = gr.Checkbox(label='Bật', value=False)
                         freeu_b1 = gr.Slider(label='B1', minimum=0, maximum=2, step=0.01, value=1.01)
                         freeu_b2 = gr.Slider(label='B2', minimum=0, maximum=2, step=0.01, value=1.02)
                         freeu_s1 = gr.Slider(label='S1', minimum=0, maximum=4, step=0.01, value=0.99)
