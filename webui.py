@@ -114,8 +114,6 @@ with shared.gradio_root:
 
                     # Hàm xử lý sự kiện khi click vào nút "Tạo ảnh"
                     def handle_generate_button():
-                        # # Dịch văn bản từ tiếng Việt sang tiếng Anh
-                       
                         from googletrans import Translator
 
                         # Giả sử 'prompt_viet' được định nghĩa ở một nơi nào đó trong mã của bạn
@@ -125,17 +123,18 @@ with shared.gradio_root:
 
                         try:
                             translated_text = translator.translate(prompt_viet, src='vi', dest='en')
-                            print("Văn bản đã dịch:", translated_text.text)
+                            
+                            # Kiểm tra xem translated_text có giá trị không
+                            if translated_text:
+                                print("Văn bản đã dịch:", translated_text.text)
+                            else:
+                                print("Không thể dịch văn bản.")
                         except Exception as e:
                             print("Lỗi trong quá trình dịch:", str(e))
                             # Xử lý lỗi theo cách bạn muốn
 
                         # Tiếp tục với phần còn lại của mã của bạn...
 
-                        # # Cập nhật giá trị của prompt sau khi dịch xong
-                        print(translated_text)
-                        prompt.value = translated_text
-                        print(prompt.value)
 
                     generate_button = gr.Button(label="Tạo ảnh", value="Tạo ảnh", elem_classes='type_row', elem_id='generate_button', visible=True)
                     generate_button.click(handle_generate_button)
