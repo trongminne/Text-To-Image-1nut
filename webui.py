@@ -121,7 +121,7 @@ with shared.gradio_root:
                     input_text = input(prompt_input.placeholder)
 
                     # Dịch văn bản từ tiếng Việt sang tiếng Anh và gán vào biến prompt
-                    prompt = translator.translate(input_text, dest='en').text
+                    prompt = translator.translate(input_text[0], src='vi', dest='en').text
 
 
                     # In kết quả
