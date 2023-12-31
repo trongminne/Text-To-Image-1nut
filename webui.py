@@ -107,7 +107,8 @@ with shared.gradio_root:
                 with gr.Column(scale=17):
                     prompt_input = gr.Textbox(show_label=False, placeholder="Nhập yêu cầu ở đây hoặc dán tham số...", elem_id='positive_prompt',
                                         container=False, autofocus=True, elem_classes='type_row', lines=1024)
-                    prompt = translator.translate(prompt_input[0], src='vi', dest='en').text # dịch tiếng việt sang anh
+                   prompt = translator.translate(prompt_input.value, src='vi', dest='en').text
+
                     default_prompt = modules.config.default_prompt
                     if isinstance(default_prompt, str) and default_prompt != '':
                         shared.gradio_root.load(lambda: default_prompt, outputs=prompt)
