@@ -16,6 +16,9 @@ import modules.style_sorter as style_sorter
 import modules.meta_parser
 import args_manager
 import copy
+from translate import Translator
+
+translator = Translator(to_lang='en')
 
 from modules.sdxl_styles import legal_style_names
 from modules.private_logger import get_current_html_path
@@ -101,9 +104,28 @@ with shared.gradio_root:
                                  elem_classes=['resizable_area', 'main_view', 'final_gallery', 'image_gallery'],
                                  elem_id='final_gallery')
             with gr.Row(elem_classes='type_row'):
+                
                 with gr.Column(scale=17):
-                    prompt = gr.Textbox(show_label=False, placeholder="Nhập yêu cầu ở đây hoặc dán tham số...", elem_id='positive_prompt',
-                                        container=False, autofocus=True, elem_classes='type_row', lines=1024)
+                  # Tạo Textbox Gradio
+                    prompt_input = gr.Textbox(
+                        show_label=False, 
+                        placeholder="Nhập yêu cầu ở đây hoặc dán tham số...",
+                        elem_id='positive_prompt',
+                        container=False, 
+                        autofocus=True, 
+                        elem_classes='type_row', 
+                        lines=1024
+                    )
+
+                    # Lấy giá trị nhập vào từ Textbox
+                    input_text = input(prompt_input.value)
+
+                    # Dịch văn bản từ tiếng Việt sang tiếng Anh và gán vào biến prompt
+                    prompt = translator.translate(input_text, dest='en').text
+
+
+                    # In kết quả
+                    print("Văn bản dịch sang tiếng Anh:", prompt)
 
                     default_prompt = modules.config.default_prompt
                     if isinstance(default_prompt, str) and default_prompt != '':
