@@ -122,8 +122,6 @@ with shared.gradio_root:
                         prompt.value = translated_text
 
                     # Gán hàm xử lý sự kiện cho nút "Tạo ảnh"
-                    generate_button.click(handle_generate_button)
-
 
                     load_parameter_button = gr.Button(label="Cài dặt thông số", value="Load Parameters", elem_classes='type_row', elem_id='load_parameter_button', visible=False)
                     skip_button = gr.Button(label="Bỏ qua", value="Bỏ qua", elem_classes='type_row_half', visible=False)
@@ -573,7 +571,7 @@ with shared.gradio_root:
             load_parameter_button
         ] + lora_ctrls, queue=False, show_progress=False)
 
-        generate_button.click(lambda: (gr.update(visible=True, interactive=True), gr.update(visible=True, interactive=True), gr.update(visible=False, interactive=False), [], True),
+        generate_button.click(lambda: (handle_generate_button(), gr.update(visible=True, interactive=True), gr.update(visible=True, interactive=True), gr.update(visible=False, interactive=False), [], True),
                               outputs=[stop_button, skip_button, generate_button, gallery, state_is_generating]) \
             .then(fn=refresh_seed, inputs=[seed_random, image_seed], outputs=image_seed) \
             .then(advanced_parameters.set_all_advanced_parameters, inputs=adps) \
