@@ -104,10 +104,10 @@ with shared.gradio_root:
                                  elem_id='final_gallery')
             with gr.Row(elem_classes='type_row'):
                 with gr.Column(scale=17):
-                    input_text = gr.Textbox(show_label=False, placeholder="Nhập yêu cầu ở đây hoặc dán tham số...", elem_id='positive_prompt',
+                    input_text = gr.Textbox(show_label=False, placeholder="Tiếng việt...", elem_id='positive_prompt',
                                         container=False, autofocus=True, elem_classes='type_row', lines=1024)
                     prompt_input = translator.translate(input_text.value)
-                    prompt = gr.Textbox(show_label=False, placeholder="Nhập yêu cầu ở đây hoặc dán tham số...", elem_id='positive_prompt',
+                    prompt = gr.Textbox(show_label=False, placeholder="Tiếng anh...", elem_id='positive_prompt',
                                         container=False, autofocus=True, elem_classes='type_row', lines=1024, value=prompt_input)
                     default_prompt = modules.config.default_prompt
                     if isinstance(default_prompt, str) and default_prompt != '':
