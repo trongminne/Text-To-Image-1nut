@@ -78,7 +78,7 @@ def generate_clicked(*args):
 
 reload_javascript()
 
-title = f'Fooocus {fooocus_version.version}'
+title = f'Trọng Min Text to Image'
 
 if isinstance(args_manager.args.preset, str):
     title += ' ' + args_manager.args.preset
@@ -138,11 +138,11 @@ with shared.gradio_root:
                     with gr.TabItem(label='Mở rộng, tăng cường') as uov_tab:
                         with gr.Row():
                             with gr.Column():
-                                uov_input_image = grh.Image(label='Drag above image to here', source='upload', type='numpy')
+                                uov_input_image = grh.Image(label='Kéo ảnh ở trên đây', source='upload', type='numpy')
                             with gr.Column():
-                                uov_method = gr.Radio(label='Upscale or Variation:', choices=flags.uov_list, value=flags.disabled)
+                                uov_method = gr.Radio(label='Mở rộng kích thước hoặc Biến thể:', choices=flags.uov_list, value=flags.disabled)
                                 gr.HTML('<a href="https://github.com/lllyasviel/Fooocus/discussions/390" target="_blank">\U0001F4D4 Document</a>')
-                    with gr.TabItem(label='Image Prompt') as ip_tab:
+                    with gr.TabItem(label='Gợi ý hình ảnh') as ip_tab:
                         with gr.Row():
                             ip_images = []
                             ip_types = []
@@ -152,29 +152,28 @@ with shared.gradio_root:
                             ip_ad_cols = []
                             for _ in range(4):
                                 with gr.Column():
-                                    ip_image = grh.Image(label='Image', source='upload', type='numpy', show_label=False, height=300)
+                                    ip_image = grh.Image(label='Ảnh', source='upload', type='numpy', show_label=False, height=300)
                                     ip_images.append(ip_image)
                                     ip_ctrls.append(ip_image)
                                     with gr.Column(visible=False) as ad_col:
                                         with gr.Row():
                                             default_end, default_weight = flags.default_parameters[flags.default_ip]
 
-                                            ip_stop = gr.Slider(label='Stop At', minimum=0.0, maximum=1.0, step=0.001, value=default_end)
+                                            ip_stop = gr.Slider(label='Dừng tại', minimum=0.0, maximum=1.0, step=0.001, value=default_end)
                                             ip_stops.append(ip_stop)
                                             ip_ctrls.append(ip_stop)
 
-                                            ip_weight = gr.Slider(label='Weight', minimum=0.0, maximum=2.0, step=0.001, value=default_weight)
+                                            ip_weight = gr.Slider(label='Trọng số', minimum=0.0, maximum=2.0, step=0.001, value=default_weight)
                                             ip_weights.append(ip_weight)
                                             ip_ctrls.append(ip_weight)
 
-                                        ip_type = gr.Radio(label='Type', choices=flags.ip_list, value=flags.default_ip, container=False)
+                                        ip_type = gr.Radio(label='Loại', choices=flags.ip_list, value=flags.default_ip, container=False)
                                         ip_types.append(ip_type)
                                         ip_ctrls.append(ip_type)
 
                                         ip_type.change(lambda x: flags.default_parameters[x], inputs=[ip_type], outputs=[ip_stop, ip_weight], queue=False, show_progress=False)
                                     ip_ad_cols.append(ad_col)
-                        ip_advanced = gr.Checkbox(label='Advanced', value=False, container=False)
-                        gr.HTML('* \"Image Prompt\" is powered by Fooocus Image Mixture Engine (v1.0.1). <a href="https://github.com/lllyasviel/Fooocus/discussions/557" target="_blank">\U0001F4D4 Document</a>')
+                        ip_advanced = gr.Checkbox(label='Nâng cao', value=False, container=False)
 
                         def ip_advance_checked(x):
                             return [gr.update(visible=x)] * len(ip_ad_cols) + \
@@ -185,26 +184,24 @@ with shared.gradio_root:
                         ip_advanced.change(ip_advance_checked, inputs=ip_advanced,
                                            outputs=ip_ad_cols + ip_types + ip_stops + ip_weights,
                                            queue=False, show_progress=False)
-                    with gr.TabItem(label='Inpaint or Outpaint') as inpaint_tab:
-                        inpaint_input_image = grh.Image(label='Drag above image to here', source='upload', type='numpy', tool='sketch', height=500, brush_color="#FFFFFF", elem_id='inpaint_canvas')
+                    with gr.TabItem(label='Khôi phục, mở rộng') as inpaint_tab:
+                        inpaint_input_image = grh.Image(label='Kéo ảnh từ trên xuống đây', source='upload', type='numpy', tool='sketch', height=500, brush_color="#FFFFFF", elem_id='inpaint_canvas')
                         with gr.Row():
-                            inpaint_additional_prompt = gr.Textbox(placeholder="Describe what you want to inpaint.", elem_id='inpaint_additional_prompt', label='Inpaint Additional Prompt', visible=False)
-                            outpaint_selections = gr.CheckboxGroup(choices=['Left', 'Right', 'Top', 'Bottom'], value=[], label='Outpaint Direction')
-                            inpaint_mode = gr.Dropdown(choices=modules.flags.inpaint_options, value=modules.flags.inpaint_option_default, label='Method')
-                        example_inpaint_prompts = gr.Dataset(samples=modules.config.example_inpaint_prompts, label='Additional Prompt Quick List', components=[inpaint_additional_prompt], visible=False)
-                        gr.HTML('* Powered by Fooocus Inpaint Engine <a href="https://github.com/lllyasviel/Fooocus/discussions/414" target="_blank">\U0001F4D4 Document</a>')
+                            inpaint_additional_prompt = gr.Textbox(placeholder="Miêu tả những gì bạn muốn khôi phục ảnh.", elem_id='inpaint_additional_prompt', label='Inpaint Additional Prompt', visible=False)
+                            outpaint_selections = gr.CheckboxGroup(choices=['Trái', 'Phải', 'Trên', 'Dưới'], value=[], label='Hướng mở rộng ảnh')
+                            inpaint_mode = gr.Dropdown(choices=modules.flags.inpaint_options, value=modules.flags.inpaint_option_default, label='Phương pháp')
+                        example_inpaint_prompts = gr.Dataset(samples=modules.config.example_inpaint_prompts, label='Danh sách Yêu Cầu Bổ Sung Nhanh', components=[inpaint_additional_prompt], visible=False)
                         example_inpaint_prompts.click(lambda x: x[0], inputs=example_inpaint_prompts, outputs=inpaint_additional_prompt, show_progress=False, queue=False)
-                    with gr.TabItem(label='Describe') as desc_tab:
+                    with gr.TabItem(label='Mô tả') as desc_tab:
                         with gr.Row():
                             with gr.Column():
-                                desc_input_image = grh.Image(label='Drag any image to here', source='upload', type='numpy')
+                                desc_input_image = grh.Image(label='Kéo bất kỳ ảnh nào đến đây', source='upload', type='numpy')
                             with gr.Column():
                                 desc_method = gr.Radio(
                                     label='Content Type',
                                     choices=[flags.desc_type_photo, flags.desc_type_anime],
                                     value=flags.desc_type_photo)
                                 desc_btn = gr.Button(value='Describe this Image into Prompt')
-                                gr.HTML('<a href="https://github.com/lllyasviel/Fooocus/discussions/1363" target="_blank">\U0001F4D4 Document</a>')
             switch_js = "(x) => {if(x){viewer_to_bottom(100);viewer_to_bottom(500);}else{viewer_to_top();} return x;}"
             down_js = "() => {viewer_to_bottom();}"
 
@@ -219,20 +216,20 @@ with shared.gradio_root:
             desc_tab.select(lambda: 'desc', outputs=current_tab, queue=False, _js=down_js, show_progress=False)
 
         with gr.Column(scale=1, visible=modules.config.default_advanced_checkbox) as advanced_column:
-            with gr.Tab(label='Setting'):
-                performance_selection = gr.Radio(label='Performance',
+            with gr.Tab(label='Cài đặt'):
+                performance_selection = gr.Radio(label='Độ chính xác',
                                                  choices=modules.flags.performance_selections,
                                                  value=modules.config.default_performance)
-                aspect_ratios_selection = gr.Radio(label='Aspect Ratios', choices=modules.config.available_aspect_ratios,
+                aspect_ratios_selection = gr.Radio(label='Tỷ lệ khung hình', choices=modules.config.available_aspect_ratios,
                                                    value=modules.config.default_aspect_ratio, info='width × height',
                                                    elem_classes='aspect_ratios')
-                image_number = gr.Slider(label='Image Number', minimum=1, maximum=modules.config.default_max_image_number, step=1, value=modules.config.default_image_number)
-                negative_prompt = gr.Textbox(label='Negative Prompt', show_label=True, placeholder="Type prompt here.",
-                                             info='Describing what you do not want to see.', lines=2,
+                image_number = gr.Slider(label='Số lượng ảnh', minimum=1, maximum=modules.config.default_max_image_number, step=1, value=modules.config.default_image_number)
+                negative_prompt = gr.Textbox(label='Yêu cầu Phủ định', show_label=True, placeholder="Nhập yêu cầu ở đây...",
+                                             info='Mô tả những gì bạn không muốn thấy...', lines=2,
                                              elem_id='negative_prompt',
                                              value=modules.config.default_prompt_negative)
-                seed_random = gr.Checkbox(label='Random', value=True)
-                image_seed = gr.Textbox(label='Seed', value=0, max_lines=1, visible=False) # workaround for https://github.com/gradio-app/gradio/issues/5354
+                seed_random = gr.Checkbox(label='Ngẫu nhiên', value=True)
+                image_seed = gr.Textbox(label='Giá trị khởi đầu', value=0, max_lines=1, visible=False) # workaround for https://github.com/gradio-app/gradio/issues/5354
 
                 def random_checked(r):
                     return gr.update(visible=not r)
@@ -253,21 +250,21 @@ with shared.gradio_root:
                                    queue=False, show_progress=False)
 
                 if not args_manager.args.disable_image_log:
-                    gr.HTML(f'<a href="/file={get_current_html_path()}" target="_blank">\U0001F4DA History Log</a>')
+                    gr.HTML(f'<a href="/file={get_current_html_path()}" target="_blank">\U0001F4DA Lịch sử bản ghi</a>')
 
-            with gr.Tab(label='Style'):
+            with gr.Tab(label='Phong cách'):
                 style_sorter.try_load_sorted_styles(
                     style_names=legal_style_names,
                     default_selected=modules.config.default_styles)
 
                 style_search_bar = gr.Textbox(show_label=False, container=False,
-                                              placeholder="\U0001F50E Type here to search styles ...",
+                                              placeholder="\U0001F50E Nhập vào đây để tìm kiếm phong cách...",
                                               value="",
-                                              label='Search Styles')
+                                              label='Tìm kiếm Phong cách')
                 style_selections = gr.CheckboxGroup(show_label=False, container=False,
                                                     choices=copy.deepcopy(style_sorter.all_styles),
                                                     value=copy.deepcopy(modules.config.default_styles),
-                                                    label='Selected Styles',
+                                                    label='Các Phong cách Đã Chọn',
                                                     elem_classes=['style_selections'])
                 gradio_receiver_style_selections = gr.Textbox(elem_id='gradio_receiver_style_selections', visible=False)
 
@@ -291,14 +288,14 @@ with shared.gradio_root:
             with gr.Tab(label='Model'):
                 with gr.Group():
                     with gr.Row():
-                        base_model = gr.Dropdown(label='Base Model (SDXL only)', choices=modules.config.model_filenames, value=modules.config.default_base_model_name, show_label=True)
-                        refiner_model = gr.Dropdown(label='Refiner (SDXL or SD 1.5)', choices=['None'] + modules.config.model_filenames, value=modules.config.default_refiner_model_name, show_label=True)
+                        base_model = gr.Dropdown(label='Mô hình Cơ bản (chỉ áp dụng cho SDXL)', choices=modules.config.model_filenames, value=modules.config.default_base_model_name, show_label=True)
+                        refiner_model = gr.Dropdown(label='Mô hình Tinh chỉnh (SDXL hoặc SD 1.5)', choices=['None'] + modules.config.model_filenames, value=modules.config.default_refiner_model_name, show_label=True)
 
-                    refiner_switch = gr.Slider(label='Refiner Switch At', minimum=0.1, maximum=1.0, step=0.0001,
-                                               info='Use 0.4 for SD1.5 realistic models; '
-                                                    'or 0.667 for SD1.5 anime models; '
-                                                    'or 0.8 for XL-refiners; '
-                                                    'or any value for switching two SDXL models.',
+                    refiner_switch = gr.Slider(label='Chuyển đổi Mô hình Tinh chỉnh ở', minimum=0.1, maximum=1.0, step=0.0001,
+                                             info = 'Sử dụng 0.4 cho mô hình thực tế SD1.5; ' 
+                                                       'hoặc 0.667 cho mô hình anime SD1.5; ' 
+                                                       'hoặc 0.8 cho XL-refiners; '
+                                                       'hoặc bất kỳ giá trị nào để chuyển đổi hai mô hình SDXL.',
                                                value=modules.config.default_refiner_switch,
                                                visible=modules.config.default_refiner_model_name != 'None')
 
