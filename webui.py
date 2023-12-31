@@ -103,32 +103,13 @@ with shared.gradio_root:
                                  elem_classes=['resizable_area', 'main_view', 'final_gallery', 'image_gallery'],
                                  elem_id='final_gallery')
             with gr.Row(elem_classes='type_row'):
-                def translate_text(prompt):
-                # Dịch văn bản từ tiếng Việt sang tiếng Anh
-                translated_text = translator.translate(prompt, src='vi', dest='en').text
-                return translated_text
-
-                # Tạo giao diện Gradio với một cột và một Textbox
                 with gr.Column(scale=17):
-                    prompt_input = gr.Textbox(
-                        show_label=False, 
-                        placeholder="Nhập yêu cầu ở đây hoặc dán tham số...",
-                        elem_id='positive_prompt',
-                        container=False, 
-                        autofocus=True, 
-                        elem_classes='type_row', 
-                        lines=1024
-                    )
-
+                    prompt_input = gr.Textbox(show_label=False, placeholder="Nhập yêu cầu ở đây hoặc dán tham số...", elem_id='positive_prompt',
+                                        container=False, autofocus=True, elem_classes='type_row', lines=1024)
+                    prompt = translator.translate(prompt_input[0], src='vi', dest='en').text # dịch tiếng việt sang anh
                     default_prompt = modules.config.default_prompt
                     if isinstance(default_prompt, str) and default_prompt != '':
-                        shared.gradio_root.load(lambda: default_prompt, outputs=prompt_input)
-
-                # Tạo giao diện Gradio cho việc dịch văn bản
-                iface = gr.Interface(fn=translate_text, inputs=prompt_input, outputs="text")
-
-                # Khởi chạy giao diện
-                iface.launch()
+                        shared.gradio_root.load(lambda: default_prompt, outputs=prompt)
 
                 with gr.Column(scale=3, min_width=0):
                     generate_button = gr.Button(label="Tạo ảnh", value="Tạo ảnh", elem_classes='type_row', elem_id='generate_button', visible=True)
