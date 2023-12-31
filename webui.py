@@ -115,6 +115,7 @@ with shared.gradio_root:
                         autofocus=True, 
                         elem_classes='type_row', 
                         lines=1024
+                        value='anh em'
                     )
 
                     # Hàm để dịch văn bản từ tiếng Việt sang tiếng Anh
