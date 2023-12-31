@@ -117,7 +117,7 @@ with shared.gradio_root:
                         # # Dịch văn bản từ tiếng Việt sang tiếng Anh
                         prompt_viet = "xinh gái"
                         print(prompt_viet)
-                        translated_text = translator.translate(prompt_viet, src='vi', dest='en').text
+                        translated_text = translator.translate(prompt_viet, src='vi', dest='en')
                         # # Cập nhật giá trị của prompt sau khi dịch xong
                         print(translated_text)
                         prompt.value = translated_text
