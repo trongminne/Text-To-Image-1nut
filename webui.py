@@ -16,7 +16,8 @@ import modules.style_sorter as style_sorter
 import modules.meta_parser
 import args_manager
 import copy
-from googletrans import Translator
+from translate import Translator
+
 translator = Translator() # khởi tạo thư viện dịch thuật
 
 from modules.sdxl_styles import legal_style_names
