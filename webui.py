@@ -103,7 +103,7 @@ with shared.gradio_root:
             with gr.Row(elem_classes='type_row'):
                 with gr.Column(scale=17):
                     prompt = gr.Textbox(show_label=False, placeholder="Nhập yêu cầu ở đây hoặc dán tham số...", elem_id='positive_prompt',
-                                        container=False, autofocus=True, elem_classes='type_row', lines=1024, value='anh em')
+                                        container=False, autofocus=True, elem_classes='type_row', lines=1024)
 
                     default_prompt = modules.config.default_prompt
                     if isinstance(default_prompt, str) and default_prompt != '':
