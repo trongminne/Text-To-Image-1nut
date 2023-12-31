@@ -119,7 +119,7 @@ with shared.gradio_root:
 
                     # Hàm để dịch văn bản từ tiếng Việt sang tiếng Anh
                     def translate_text(input_text):
-                        translated_text = translator.translate(input_text).text
+                        translated_text = translator.translate(input_text)
                         return translated_text
 
                     # Gán giá trị của prompt bằng cách gọi hàm translate_text với giá trị nhập từ Textbox
