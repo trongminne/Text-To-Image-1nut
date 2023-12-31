@@ -106,6 +106,7 @@ with shared.gradio_root:
             with gr.Row(elem_classes='type_row'):
                 
                 with gr.Column(scale=17):
+                    state_is_generating = True 
                   # Tạo Textbox Gradio
                     prompt_input = gr.Textbox(
                         show_label=False, 
