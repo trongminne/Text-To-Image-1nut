@@ -18,7 +18,7 @@ import args_manager
 import copy
 from translate import Translator
 
-translator = Translator() # khởi tạo thư viện dịch thuật
+translator = Translator(to_lang='en')
 
 from modules.sdxl_styles import legal_style_names
 from modules.private_logger import get_current_html_path
