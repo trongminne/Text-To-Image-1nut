@@ -23,7 +23,7 @@ from modules.private_logger import get_current_html_path
 from modules.ui_gradio_extensions import reload_javascript
 from modules.auth import auth_enabled, check_auth
 
-translator = Translator() # khởi tạo thư viện dịch thuật
+translator = Translator(to_lang='en') # khởi tạo thư viện dịch thuật
 
 def generate_clicked(*args):
     import ldm_patched.modules.model_management as model_management
@@ -106,7 +106,7 @@ with shared.gradio_root:
                 with gr.Column(scale=17):
                     input_text = gr.Textbox(show_label=False, placeholder="Nhập yêu cầu ở đây hoặc dán tham số...", elem_id='positive_prompt',
                                         container=False, autofocus=True, elem_classes='type_row', lines=1024)
-                    prompt = translator.translate(input_text.value, src='vi', dest='en').text
+                    prompt = translator.translate(input_text.value)
                     default_prompt = modules.config.default_prompt
                     if isinstance(default_prompt, str) and default_prompt != '':
                         shared.gradio_root.load(lambda: default_prompt, outputs=prompt)
