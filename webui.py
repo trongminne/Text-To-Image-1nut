@@ -123,8 +123,8 @@ with shared.gradio_root:
                         prompt.value = translated_text
                         print(prompt.value)
 
-                    generate_button = gr.Button(label="Tạo ảnh", value="Tạo ảnh", elem_classes='type_row', elem_id='generate_button', visible=True,  onClick=handle_generate_button)
-       
+                    generate_button = gr.Button(label="Tạo ảnh", value="Tạo ảnh", elem_classes='type_row', elem_id='generate_button', visible=True)
+                    generate_button.click(handle_generate_button)
                     load_parameter_button = gr.Button(label="Cài dặt thông số", value="Load Parameters", elem_classes='type_row', elem_id='load_parameter_button', visible=False)
                     skip_button = gr.Button(label="Bỏ qua", value="Bỏ qua", elem_classes='type_row_half', visible=False)
                     stop_button = gr.Button(label="Dừng lại", value="Dừng", elem_classes='type_row_half', elem_id='stop_button', visible=False)
