@@ -127,14 +127,14 @@ with shared.gradio_root:
 
                     # Tạo giao diện Gradio
                     iface = gr.Interface(
-                        fn=your_function_to_process_data,
+                        fn=translate_text,
                         inputs=prompt_input,  # Sử dụng prompt_input làm đầu vào
                         outputs="auto"
                     )
 
                     # Khởi chạy giao diện
                     iface.launch()
-                    
+
                     default_prompt = modules.config.default_prompt
                     if isinstance(default_prompt, str) and default_prompt != '':
                         shared.gradio_root.load(lambda: default_prompt, outputs=prompt)
