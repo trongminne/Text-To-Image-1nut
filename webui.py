@@ -125,7 +125,8 @@ with shared.gradio_root:
 
                     # Gán giá trị của prompt bằng cách gọi hàm translate_text với giá trị nhập từ Textbox
                     prompt = translate_text(prompt_input.value)
-                    prompt = gradio.inputs.Input(prompt, parse_meta, inputs=[prompt, state_is_generating], outputs=[prompt, generate_button, load_parameter_button], queue=False, show_progress=False)
+                    prompt = gr.inputs.Input(prompt, parse_meta, inputs=[prompt, state_is_generating], outputs=[prompt, generate_button, load_parameter_button], queue=False, show_progress=False)
+
                     default_prompt = modules.config.default_prompt
                     if isinstance(default_prompt, str) and default_prompt != '':
                         shared.gradio_root.load(lambda: default_prompt, outputs=prompt)
