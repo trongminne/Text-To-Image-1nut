@@ -250,7 +250,7 @@ with shared.gradio_root:
 
                 if not args_manager.args.disable_image_log:
 
-            with gr.Tab(label='Phong cách'):
+            with gr.Tab(label='styles'):
                 style_sorter.try_load_sorted_styles(
                     style_names=legal_style_names,
                     default_selected=modules.config.default_styles)
