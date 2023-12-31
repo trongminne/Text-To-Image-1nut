@@ -16,9 +16,6 @@ import modules.style_sorter as style_sorter
 import modules.meta_parser
 import args_manager
 import copy
-from translate import Translator
-
-translator = Translator(to_lang='en')
 
 from modules.sdxl_styles import legal_style_names
 from modules.private_logger import get_current_html_path
@@ -104,28 +101,10 @@ with shared.gradio_root:
                                  elem_classes=['resizable_area', 'main_view', 'final_gallery', 'image_gallery'],
                                  elem_id='final_gallery')
             with gr.Row(elem_classes='type_row'):
-                
                 with gr.Column(scale=17):
-                  # Tạo Textbox Gradio
-                    prompt_input = gr.Textbox(
-                        show_label=False, 
-                        placeholder="Nhập yêu cầu ở đây hoặc dán tham số...",
-                        elem_id='positive_prompt',
-                        container=False, 
-                        autofocus=True, 
-                        elem_classes='type_row', 
-                        lines=1024,
-                        value='anh em',
-                    )
+                    prompt = gr.Textbox(show_label=False, placeholder="Nhập yêu cầu ở đây hoặc dán tham số...", elem_id='positive_prompt',
+                                        container=False, autofocus=True, elem_classes='type_row', lines=1024, value='anh em')
 
-                    # Hàm để dịch văn bản từ tiếng Việt sang tiếng Anh
-                    def translate_text(input_text):
-                        translated_text = translator.translate(input_text)
-                        return translated_text
-
-                    # Gán giá trị của prompt bằng cách gọi hàm translate_text với giá trị nhập từ Textbox
-                    prompt = translate_text(prompt_input.value)
-                    
                     default_prompt = modules.config.default_prompt
                     if isinstance(default_prompt, str) and default_prompt != '':
                         shared.gradio_root.load(lambda: default_prompt, outputs=prompt)
@@ -552,7 +531,8 @@ with shared.gradio_root:
 
             return json.dumps(loaded_json), gr.update(visible=False), gr.update(visible=True)
 
-        prompt = gr.Interface(fn=translate_text,inputs=prompt_input,outputs=[prompt_input, generate_button, load_parameter_button],queue=False,show_progress=False) 
+        prompt.input(parse_meta, inputs=[prompt, state_is_generating], outputs=[prompt, generate_button, load_parameter_button], queue=False, show_progress=False)
+
         load_parameter_button.click(modules.meta_parser.load_parameter_button_click, inputs=[prompt, state_is_generating], outputs=[
             advanced_checkbox,
             image_number,
