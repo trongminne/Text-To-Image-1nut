@@ -119,11 +119,12 @@ with shared.gradio_root:
 
                     # Hàm để dịch văn bản từ tiếng Việt sang tiếng Anh
                     def translate_text(input_text):
-                        translated_text = translator.translate(input_text, dest='en').text
+                        translated_text = translator.translate(input_text, to_lang='en').text
                         return translated_text
 
                     # Gán giá trị của prompt bằng cách gọi hàm translate_text với giá trị nhập từ Textbox
                     prompt = translate_text(prompt_input.value)
+
                     default_prompt = modules.config.default_prompt
                     if isinstance(default_prompt, str) and default_prompt != '':
                         shared.gradio_root.load(lambda: default_prompt, outputs=prompt)
