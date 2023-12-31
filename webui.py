@@ -107,7 +107,7 @@ with shared.gradio_root:
                 
                 with gr.Column(scale=17):
                   # Tạo Textbox Gradio
-                    prompt = gr.Textbox(
+                    prompt_input = gr.Textbox(
                         show_label=False, 
                         placeholder="Nhập yêu cầu ở đây hoặc dán tham số...",
                         elem_id='positive_prompt',
@@ -122,12 +122,11 @@ with shared.gradio_root:
                         translated_text = translator.translate(input_text, dest='en').text
                         return translated_text
 
-                    # Tạo giao diện Gradio và kết nối với hàm dịch
-                    gr.Interface(
-                        fn=translate_text, 
-                        inputs=prompt, 
-                        outputs="text"
-                    ).launch()
+                    # Gán giá trị của prompt bằng cách gọi hàm translate_text với giá trị nhập từ Textbox
+                    prompt = translate_text(prompt_input.value)
+                    default_prompt = modules.config.default_prompt
+                    if isinstance(default_prompt, str) and default_prompt != '':
+                        shared.gradio_root.load(lambda: default_prompt, outputs=prompt)
 
                 with gr.Column(scale=3, min_width=0):
                     generate_button = gr.Button(label="Tạo ảnh", value="Tạo ảnh", elem_classes='type_row', elem_id='generate_button', visible=True)
