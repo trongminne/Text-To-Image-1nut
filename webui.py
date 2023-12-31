@@ -106,6 +106,14 @@ with shared.gradio_root:
                 with gr.Column(scale=17):
                     prompt = gr.Textbox(show_label=False, placeholder="Nhập yêu cầu ở đây hoặc dán tham số...", elem_id='positive_prompt',
                                         container=False, autofocus=True, elem_classes='type_row', lines=1024, value='mèo')
+                    
+                    default_prompt = modules.config.default_prompt
+                    if isinstance(default_prompt, str) and default_prompt != '':
+                        shared.gradio_root.load(lambda: default_prompt, outputs=prompt)
+
+                with gr.Column(scale=3, min_width=0):
+                    generate_button = gr.Button(label="Tạo ảnh", value="Tạo ảnh", elem_classes='type_row', elem_id='generate_button', visible=True)
+                    
                     # Hàm xử lý sự kiện khi click vào nút "Tạo ảnh"
                     def handle_generate_button():
                         # Dịch văn bản từ tiếng Việt sang tiếng Anh
@@ -116,12 +124,7 @@ with shared.gradio_root:
                     # Gán hàm xử lý sự kiện cho nút "Tạo ảnh"
                     generate_button.click(handle_generate_button)
 
-                    default_prompt = modules.config.default_prompt
-                    if isinstance(default_prompt, str) and default_prompt != '':
-                        shared.gradio_root.load(lambda: default_prompt, outputs=prompt)
 
-                with gr.Column(scale=3, min_width=0):
-                    generate_button = gr.Button(label="Tạo ảnh", value="Tạo ảnh", elem_classes='type_row', elem_id='generate_button', visible=True)
                     load_parameter_button = gr.Button(label="Cài dặt thông số", value="Load Parameters", elem_classes='type_row', elem_id='load_parameter_button', visible=False)
                     skip_button = gr.Button(label="Bỏ qua", value="Bỏ qua", elem_classes='type_row_half', visible=False)
                     stop_button = gr.Button(label="Dừng lại", value="Dừng", elem_classes='type_row_half', elem_id='stop_button', visible=False)
