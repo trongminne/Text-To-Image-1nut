@@ -115,7 +115,7 @@ with shared.gradio_root:
                     # Hàm xử lý sự kiện khi click vào nút "Tạo ảnh"
                     def handle_generate_button():
                         # # Dịch văn bản từ tiếng Việt sang tiếng Anh
-                        prompt_viet = prompt.value
+                        prompt_viet = "prompt.value"
                         print(prompt_viet)
                         translated_text = translator.translate(prompt_viet, src='vi', dest='en').text
                         # # Cập nhật giá trị của prompt sau khi dịch xong
