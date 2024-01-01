@@ -220,7 +220,7 @@ with shared.gradio_root:
                                                  choices=modules.flags.performance_selections,
                                                  value=modules.config.default_performance)
                 aspect_ratios_selection = gr.Radio(label='Tỷ lệ khung hình', choices=modules.config.available_aspect_ratios,
-                                                   value=modules.config.default_aspect_ratio, info='width × height',
+                                                   value=modules.config.default_aspect_ratio, info='Ngang × rộng',
                                                    elem_classes='aspect_ratios')
                 image_number = gr.Slider(label='Số lượng ảnh', minimum=1, maximum=modules.config.default_max_image_number, step=1, value=modules.config.default_image_number)
                 negative_prompt = gr.Textbox(label='Yêu cầu Phủ định', show_label=True, placeholder="Nhập yêu cầu ở đây...",
