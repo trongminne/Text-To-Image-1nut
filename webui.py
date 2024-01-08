@@ -99,7 +99,6 @@ def generate_image():
     english_description = translate_text()
     # Thực hiện các bước tạo ảnh với mô tả tiếng Anh đã dịch
 
-
 with shared.gradio_root:
     with gr.Row():
         with gr.Column(scale=2):
