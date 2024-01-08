@@ -126,8 +126,6 @@ with shared.gradio_root:
                         print('prompt_vn: ', prompt.value)
                         # prompt.value = translate_text(prompt_vn)
                         # print('prompt_en: ', prompt.value)
-                        # Thêm dòng sau để cập nhật giá trị trên giao diện người dùng
-                        prompt.update()
 
                     load_parameter_button = gr.Button(label="Cài dặt thông số", value="Tải thông số", elem_classes='type_row', elem_id='load_parameter_button', visible=False)
                     skip_button = gr.Button(label="Bỏ qua", value="Bỏ qua", elem_classes='type_row_half', visible=False)
