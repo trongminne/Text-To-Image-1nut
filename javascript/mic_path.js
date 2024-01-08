@@ -142,15 +142,7 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
     // Thêm hàm simulateConfirmButtonClick() để tự động chọn nút "Đồng ý":
     function simulateConfirmButtonClick() {
         const confirmButton = document.querySelector(".swal2-confirm");
-        var vietnameseText = document.querySelector('.scroll-hide').value;
-        alert(vietnameseText);
-
-        // Kiểm tra xem các hàm có được định nghĩa đúng không
-        console.log("Calling translate_text...");
-        var englishText = translate_text(vietnameseText);
-        console.log("English Text:", englishText);
-
-        console.log("Calling generate_image...");
+       
         if (confirmButton) {
             confirmButton.click();
             document.getElementById("generate_button").click();
