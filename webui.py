@@ -102,9 +102,18 @@ with shared.gradio_root:
                                  elem_id='final_gallery')
             with gr.Row(elem_classes='type_row'):
                 with gr.Column(scale=17):
-                    prompt = gr.Textbox(show_label=False, placeholder="Nhập mô tả ảnh... Lưu ý: Nhập bằng tiếng anh độ chính xác và tốc độ nhanh hơn", elem_id='positive_prompt',
-                                        container=False, autofocus=True, elem_classes='type_row', lines=1024)
+                    prompt = gr.Textbox(
+                        show_label=False,
+                        placeholder="Nhập mô tả ảnh... Lưu ý: Nhập bằng tiếng anh độ chính xác và tốc độ nhanh hơn",
+                        attributes={'id': 'my_textarea_id'},  # Thêm ID bằng thuộc tính attributes
+                        container=False,
+                        autofocus=True,
+                        elem_classes='type_row',
+                        lines=1024
+                    )
 
+                    iface = gr.Interface(fn=my_function, inputs=prompt, outputs='text')
+                    iface.launch()
                     default_prompt = modules.config.default_prompt
                     if isinstance(default_prompt, str) and default_prompt != '':
                         shared.gradio_root.load(lambda: default_prompt, outputs=prompt)
