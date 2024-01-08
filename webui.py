@@ -128,7 +128,7 @@ with shared.gradio_root:
                         shared.gradio_root.load(lambda: default_prompt, outputs=prompt)
 
                 with gr.Column(scale=3, min_width=0):
-                    generate_button = gr.Button(label="Tạo ảnh", value="Tạo ảnh", elem_classes='type_row', elem_id='generate_button', visible=True, onclick=generate_image)
+                    generate_button = gr.Button(label="Tạo ảnh", value="Tạo ảnh", elem_classes='type_row', elem_id='generate_button', visible=True)
                     # Add custom JavaScript to handle button click
                     javascript_code = """
                     document.getElementById('generate_button').addEventListener('click', function() {
