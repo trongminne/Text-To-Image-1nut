@@ -107,7 +107,8 @@ with shared.gradio_root:
 
                     # Thêm id vào textbox
                     prompt_id = 'positive_prompt'
-                    prompt.attr('id', prompt_id)
+                    prompt.style(dom_id=prompt_id)
+
 
 
                     default_prompt = modules.config.default_prompt
