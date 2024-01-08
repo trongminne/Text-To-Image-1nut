@@ -92,6 +92,7 @@ from googletrans import Translator
 def translate_text():
     translator = Translator()
     vietnamese_text = prompt.value  # Lấy giá trị từ ô nhập văn bản tiếng Việt
+    print(vietnamese_text)
     english_text = translator.translate(vietnamese_text, src='vi', dest='en').text  # Dịch sang tiếng Anh
     return english_text
 
