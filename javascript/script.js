@@ -1,9 +1,12 @@
- window.onload = function () {
-        var promptElement = document.getElementById('positive_prompt');
-        if (promptElement) {
-            alert('Đã truy cập vào trang web!');
-        }
+window.onload = function () {
+    var promptElements = document.querySelectorAll('[data-testid="textbox"]');
+    if (promptElements.length > 0) {
+        // Lấy phần tử đầu tiên nếu có nhiều phần tử
+        var promptElement = promptElements[0];
+        alert('Đã truy cập vào trang web!');
     }
+}
+
 // based on https://github.com/AUTOMATIC1111/stable-diffusion-webui/blob/v1.6.0/script.js
 function gradioApp() {
     const elems = document.getElementsByTagName('gradio-app');
