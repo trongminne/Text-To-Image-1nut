@@ -88,16 +88,20 @@ shared.gradio_root = gr.Blocks(
     css=modules.html.css).queue()
 
 from googletrans import Translator
-prompt_vn = "xin chào"
 
-# Define translation function
+# Hàm dịch vi  to en
 def translate_text(vietnamese_text):
     translator = Translator()
     english_text = translator.translate(vietnamese_text, src='vi', dest='en').text
     return english_text
 
+def generate_button_click_handler():
+    # Gọi hàm dịch ngôn ngữ khi nút được nhấn
+    prompt_vn = prompt.value
+    prompt.value = translate_text(prompt_vn)
 
-print(translate_text(prompt_vn))
+# Tạo sự kiện cho nút generate_button
+generate_button.click(generate_button_click_handler)
 
 with shared.gradio_root:
     with gr.Row():
