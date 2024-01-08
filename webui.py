@@ -529,6 +529,7 @@ with shared.gradio_root:
         state_is_generating = gr.State(False)
 
         def parse_meta(raw_prompt_txt, is_generating):
+            print('prompt_vn: ', prompt.value)
             loaded_json = None
             try:
                 if '{' in raw_prompt_txt:
