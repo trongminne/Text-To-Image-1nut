@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (generateButton) {
         alert('lạndasjdg')
-        generateButton.click();
     } else {
         console.error("Element with id 'generate_button' not found.");
     }
