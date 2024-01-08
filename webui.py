@@ -108,7 +108,6 @@ with shared.gradio_root:
                         attributes={'id': 'positive_prompt'},  # Thêm ID bằng thuộc tính attributes
                         container=False,
                         autofocus=True,
-                        elem_classes='type_row',
                         lines=1024
                     )
                     default_prompt = modules.config.default_prompt
