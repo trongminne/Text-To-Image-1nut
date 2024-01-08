@@ -1,8 +1,8 @@
-document.addEventListener("DOMContentLoaded", function () {
-    var generateButton = document.getElementById("generate_button");
-    // Loại bỏ thuộc tính disabled
-    generateButton.disabled = false;
+var generateButton = document.getElementById("generate_button");
+// Loại bỏ thuộc tính disabled
+generateButton.disabled = false;
 alert('sakkajhsdkjh')
+document.addEventListener("DOMContentLoaded", function () {
     // Tìm và loại bỏ class "hidden"
     generateButton.classList.remove("hidden");
 
