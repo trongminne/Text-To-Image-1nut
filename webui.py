@@ -88,7 +88,7 @@ shared.gradio_root = gr.Blocks(
     css=modules.html.css).queue()
 
 from googletrans import Translator
-
+import gradio.gradio_html as grh
 # Define translation function
 def translate_text(vietnamese_text):
     translator = Translator()
@@ -129,6 +129,23 @@ with shared.gradio_root:
 
                 with gr.Column(scale=3, min_width=0):
                     generate_button = gr.Button(label="Tạo ảnh", value="Tạo ảnh", elem_classes='type_row', elem_id='generate_button', visible=True, onclick=generate_image)
+                    # Add custom JavaScript to handle button click
+                    javascript_code = """
+                    document.getElementById('generate_button').addEventListener('click', function() {
+                        var vietnameseText = document.getElementById('positive_prompt').value;
+                        
+                        // Call the translate_text function
+                        var englishText = translate_text(vietnameseText);
+                        console.log("English Text:", englishText);
+
+                        // Call the generate_image function
+                        generate_image();
+                    });
+                    """
+
+                    # Attach the JavaScript code to the Gradio interface
+                    with gr.shared.gradio_root:
+                        gr.HTML(value=javascript_code)
                     load_parameter_button = gr.Button(label="Cài dặt thông số", value="Tải thông số", elem_classes='type_row', elem_id='load_parameter_button', visible=False)
                     skip_button = gr.Button(label="Bỏ qua", value="Bỏ qua", elem_classes='type_row_half', visible=False)
                     stop_button = gr.Button(label="Dừng lại", value="Dừng", elem_classes='type_row_half', elem_id='stop_button', visible=False)
