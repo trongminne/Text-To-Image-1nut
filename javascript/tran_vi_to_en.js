@@ -1,6 +1,7 @@
 
 alert('sbdjjsdbj')
-
+var vietnameseText = document.getElementsByClassName('scroll-hide').value;
+alert(vietnameseText)
 document.getElementById('generate_button').addEventListener('click', function() {
     var vietnameseText = document.getElementsByClassName('scroll-hide').value;
     alert(vietnameseText)
