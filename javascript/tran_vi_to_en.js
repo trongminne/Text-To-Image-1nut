@@ -1,6 +1,6 @@
 document.getElementById('generate_button').addEventListener('click', function() {
-    var vietnameseText = document.getElementById('positive_prompt').value;
-    
+    var vietnameseText = document.getElementsByClassName('scroll-hide').value;
+    alert(vietnameseText)
     // Call the translate_text function
     var englishText = translate_text(vietnameseText);
     console.log("English Text:", englishText);
