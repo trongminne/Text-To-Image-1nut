@@ -1,10 +1,11 @@
-// Hàm hiển thị cảnh báo khi trang web được tải
 window.onload = function () {
     var promptElement = document.getElementById('positive_prompt');
+    console.log('Prompt Element:', promptElement);
     if (promptElement) {
         alert('Đã truy cập vào trang web!');
     }
 }
+a
 // based on https://github.com/AUTOMATIC1111/stable-diffusion-webui/blob/v1.6.0/script.js
 function gradioApp() {
     const elems = document.getElementsByTagName('gradio-app');
