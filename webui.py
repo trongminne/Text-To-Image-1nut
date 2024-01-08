@@ -87,18 +87,6 @@ shared.gradio_root = gr.Blocks(
     title=title,
     css=modules.html.css).queue()
 
-# Dịch
-from googletrans import Translator
-def translate_text():
-    translator = Translator()
-    vietnamese_text = prompt.value  # Lấy giá trị từ ô nhập văn bản tiếng Việt
-    print(vietnamese_text)
-    english_text = translator.translate(vietnamese_text, src='vi', dest='en').text  # Dịch sang tiếng Anh
-    return english_text
-
-def generate_image():
-    english_description = translate_text()
-    # Thực hiện các bước tạo ảnh với mô tả tiếng Anh đã dịch
 
 with shared.gradio_root:
     with gr.Row():
@@ -598,6 +586,20 @@ with shared.gradio_root:
         desc_btn.click(trigger_describe, inputs=[desc_method, desc_input_image],
                        outputs=[prompt, style_selections], show_progress=True, queue=True)
 
+# Dịch
+from googletrans import Translator
+def translate_text():
+    translator = Translator()
+    vietnamese_text = prompt.value  # Lấy giá trị từ ô nhập văn bản tiếng Việt
+    print(vietnamese_text)
+    english_text = translator.translate(vietnamese_text, src='vi', dest='en').text  # Dịch sang tiếng Anh
+    return english_text
+
+def generate_image():
+    print(prompt.value)
+
+    english_description = translate_text()
+    # Thực hiện các bước tạo ảnh với mô tả tiếng Anh đã dịch
 
 def dump_default_english_config():
     from modules.localization import dump_english_config
