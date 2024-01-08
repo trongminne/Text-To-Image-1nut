@@ -117,9 +117,9 @@ with shared.gradio_root:
                     </script>
                     """
 
-# Thêm mã JavaScript vào trang web Gradio
-gr.Webpage("",
-           additional_footer=alert_script)
+                    # Thêm mã JavaScript vào trang web Gradio
+                    gr.Webpage("",
+                            additional_footer=alert_script)
 
                     default_prompt = modules.config.default_prompt
                     if isinstance(default_prompt, str) and default_prompt != '':
