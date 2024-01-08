@@ -87,13 +87,13 @@ shared.gradio_root = gr.Blocks(
     title=title,
     css=modules.html.css).queue()
 
-# from googletrans import Translator
+from googletrans import Translator
 
-# # Hàm dịch vi  to en
-# def translate_text(vietnamese_text):
-#     translator = Translator()
-#     english_text = translator.translate(vietnamese_text, src='vi', dest='en').text
-#     return english_text
+# Hàm dịch vi  to en
+def translate_text(vietnamese_text):
+    translator = Translator()
+    english_text = translator.translate(vietnamese_text, src='vi', dest='en').text
+    return english_text
 
 with shared.gradio_root:
     with gr.Row():
@@ -529,10 +529,7 @@ with shared.gradio_root:
         state_is_generating = gr.State(False)
 
         def parse_meta(raw_prompt_txt, is_generating):
-            # Gán giá trị của raw_prompt_txt cho thuộc tính value của prompt
-            gr.Component(value=raw_prompt_txt, component_id='positive_prompt').update()
-
-            print("Giá trị mới của prompt:", prompt.value)
+            print("Giá trị mới của prompt:", translate_text(raw_prompt_txt))
             loaded_json = None
             try:
                 if '{' in raw_prompt_txt:
