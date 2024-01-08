@@ -1,3 +1,5 @@
+
+alert('sbdjhsahjdg')
 // based on https://github.com/AUTOMATIC1111/stable-diffusion-webui/blob/v1.6.0/script.js
 function gradioApp() {
     const elems = document.getElementsByTagName('gradio-app');
