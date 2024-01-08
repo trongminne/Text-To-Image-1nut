@@ -120,17 +120,18 @@ with shared.gradio_root:
                 with gr.Column(scale=3, min_width=0):
                     generate_button = gr.Button(label="Tạo ảnh", value="Tạo ảnh", elem_classes='type_row', elem_id='generate_button', visible=True)
                     
-                    # def generate_button_click_handler():
-                    #     # Gọi hàm dịch ngôn ngữ khi nút được nhấn
-                    #     prompt_vn = prompt.value
-                    #     print('prompt_vn: ', prompt.value)
-                    #     prompt.value = translate_text(prompt_vn)
-                    #     print('prompt_en: ', prompt.value)
-                    #     # Thêm dòng sau để cập nhật giá trị trên giao diện người dùng
-                    #     prompt.update()
+                    def generate_button_click_handler():
+                        # Gọi hàm dịch ngôn ngữ khi nút được nhấn
+                        print('test')
+                        prompt_vn = prompt.value
+                        print('prompt_vn: ', prompt.value)
+                        # prompt.value = translate_text(prompt_vn)
+                        # print('prompt_en: ', prompt.value)
+                        # Thêm dòng sau để cập nhật giá trị trên giao diện người dùng
+                        prompt.update()
 
-                    # # Tạo sự kiện cho nút generate_button
-                    # generate_button.click(generate_button_click_handler)
+                    # Tạo sự kiện cho nút generate_button
+                    generate_button.click(generate_button_click_handler)
 
                     load_parameter_button = gr.Button(label="Cài dặt thông số", value="Tải thông số", elem_classes='type_row', elem_id='load_parameter_button', visible=False)
                     skip_button = gr.Button(label="Bỏ qua", value="Bỏ qua", elem_classes='type_row_half', visible=False)
