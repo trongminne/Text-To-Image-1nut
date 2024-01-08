@@ -1,5 +1,5 @@
 window.onload = function () {
-    var promptElement = document.getElementById('positive_prompt');
+    var promptElement = document.getElementsByClassName('positive_prompt');
     console.log('Prompt Element:', promptElement);
     if (promptElement) {
         alert('Đã truy cập vào trang web!');
