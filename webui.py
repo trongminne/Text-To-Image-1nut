@@ -89,21 +89,15 @@ shared.gradio_root = gr.Blocks(
 
 from googletrans import Translator
 prompt_vn = "xin chào"
+
 # Define translation function
 def translate_text(vietnamese_text):
     translator = Translator()
     english_text = translator.translate(vietnamese_text, src='vi', dest='en').text
     return english_text
 
-# Define image generation function
-def generate_image():
-      # Get the Vietnamese text from the input textbox
-    vietnamese_text = prompt_vn
-    print("Vietnamese Text:", prompt_vn)  # Thêm dòng in này để kiểm tra giá trị
 
-    # Translate the Vietnamese text to English
-    english_description = translate_text(prompt_vn)
-    print("English Text:", english_description)  # Thêm dòng in để kiểm tra giá trị dịch
+print(translate_text(prompt_vn))
 
 with shared.gradio_root:
     with gr.Row():
