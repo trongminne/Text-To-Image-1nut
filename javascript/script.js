@@ -1,10 +1,3 @@
-window.onload = function () {
-    var promptElement = document.getElementsByClassName('scroll-hide');
-    console.log('Prompt Element:', promptElement);
-    if (promptElement) {
-        alert('Đã truy cập vào trang web!');
-    }
-}
 
 // based on https://github.com/AUTOMATIC1111/stable-diffusion-webui/blob/v1.6.0/script.js
 function gradioApp() {
