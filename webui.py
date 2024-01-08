@@ -87,20 +87,24 @@ shared.gradio_root = gr.Blocks(
     title=title,
     css=modules.html.css).queue()
 
-# Dịch
 from googletrans import Translator
-def translate_text():
+
+# Define translation function
+def translate_text(vietnamese_text):
     translator = Translator()
-    vietnamese_text = prompt.value  # Lấy giá trị từ ô nhập văn bản tiếng Việt
-    print(vietnamese_text)
-    english_text = translator.translate(vietnamese_text, src='vi', dest='en').text  # Dịch sang tiếng Anh
+    english_text = translator.translate(vietnamese_text, src='vi', dest='en').text
     return english_text
 
+# Define image generation function
 def generate_image():
-    print(prompt.value)
-
-    english_description = translate_text()
-    # Thực hiện các bước tạo ảnh với mô tả tiếng Anh đã dịch
+    # Get the Vietnamese text from the input textbox
+    vietnamese_text = prompt.value
+    
+    # Translate the Vietnamese text to English
+    english_description = translate_text(vietnamese_text)
+    
+    # Print the translated text (you can replace this with your image generation logic)
+    print("Translated Text:", english_description)
 
 with shared.gradio_root:
     with gr.Row():
