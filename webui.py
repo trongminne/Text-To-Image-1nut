@@ -127,8 +127,8 @@ with shared.gradio_root:
                         prompt.value = translate_text(prompt_vn)
                         print('prompt_en: ', prompt.value)
 
-                    # Tạo sự kiện cho nút generate_button
-                    generate_button.click(generate_button_click_handler)
+                    # # Tạo sự kiện cho nút generate_button
+                    # generate_button.click(generate_button_click_handler)
 
                     load_parameter_button = gr.Button(label="Cài dặt thông số", value="Tải thông số", elem_classes='type_row', elem_id='load_parameter_button', visible=False)
                     skip_button = gr.Button(label="Bỏ qua", value="Bỏ qua", elem_classes='type_row_half', visible=False)
