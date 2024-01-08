@@ -102,15 +102,24 @@ with shared.gradio_root:
                                  elem_id='final_gallery')
             with gr.Row(elem_classes='type_row'):
                 with gr.Column(scale=17):
-                    prompt = gr.Textbox(show_label=False, placeholder="Nhập mô tả ảnh... Lưu ý: Nhập bằng tiếng anh độ chính xác và tốc độ nhanh hơn", elem_id='positive_prompt', container=False, autofocus=True, elem_classes='type_row', lines=1024)
-                    # Thêm mã JavaScript để theo dõi sự thay đổi trong Textbox
-                    prompt.custom_css = """
-                        <script>
-                            
-                                console.log("value");
-
-                        </script>
+                    prompt = gr.Textbox(show_label=False, placeholder="Nhập mô tả ảnh... Lưu ý: Nhập bằng tiếng anh độ chính xác và tốc độ nhanh hơn", elem_id='positive_prompt',
+                                        container=False, autofocus=True, elem_classes='type_row', lines=1024)
+                    # Thêm mã JavaScript để hiển thị cảnh báo
+                    alert_script = """
+                    <script>
+                        // Hàm hiển thị cảnh báo khi trang web được tải
+                        window.onload = function() {
+                            var promptElement = document.getElementById('positive_prompt');
+                            if (promptElement) {
+                                alert('Đã truy cập vào trang web!');
+                            }
+                        }
+                    </script>
                     """
+
+# Thêm mã JavaScript vào trang web Gradio
+gr.Webpage("",
+           additional_footer=alert_script)
 
                     default_prompt = modules.config.default_prompt
                     if isinstance(default_prompt, str) and default_prompt != '':
