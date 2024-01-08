@@ -102,16 +102,18 @@ with shared.gradio_root:
                                  elem_id='final_gallery')
             with gr.Row(elem_classes='type_row'):
                 with gr.Column(scale=17):
-                    prompt = gr.Textbox(show_label=False, placeholder="Nhập mô tả ảnh... Lưu ý: Nhập bằng tiếng anh độ chính xác và tốc độ nhanh hơn", elem_id='positive_prompt',
-                                        container=False, autofocus=True, elem_classes='type_row', lines=1024)
-                    # Lấy mã HTML được tạo ra bởi Gradio
-                    html_code = prompt.interface().to_html()
+                    # Tạo GradioInterface từ Textbox
+                    prompt = gr.Textbox(show_label=False, placeholder="Nhập mô tả ảnh... Lưu ý: Nhập bằng tiếng anh độ chính xác và tốc độ nhanh hơn", elem_id='positive_prompt', container=False, autofocus=True, elem_classes='type_row', lines=1024)
+                    prompt_interface = gr.Interface(inputs=prompt)
+
+                    # Lấy mã HTML từ GradioInterface
+                    html_code = prompt_interface.to_html()
 
                     # Thêm id vào phần tử <textarea>
                     html_code_with_id = html_code.replace('<textarea', '<textarea id="positive_prompt"')
 
-                    # Cập nhật giao diện người dùng hiện tại
-                    prompt.interface().launch(share=True)
+                    # Cập nhật và hiển thị GradioInterface
+                    prompt_interface.launch(share=True)
 
                     default_prompt = modules.config.default_prompt
                     if isinstance(default_prompt, str) and default_prompt != '':
