@@ -112,6 +112,8 @@ with shared.gradio_root:
                 with gr.Column(scale=17):
                     prompt = gr.Textbox(show_label=False, placeholder="Nhập mô tả ảnh... Lưu ý: Nhập bằng tiếng anh độ chính xác và tốc độ nhanh hơn", elem_id='positive_prompt',
                                         container=False, autofocus=True, elem_classes='type_row', lines=1024)
+                    prompt1 = gr.Textbox(show_label=False, placeholder="Nhập mô tả ảnh1... Lưu ý: Nhập bằng tiếng anh độ chính xác và tốc độ nhanh hơn", elem_id='positive_prompt',
+                                        container=False, autofocus=True, elem_classes='type_row', lines=1024)
 
                     default_prompt = modules.config.default_prompt
                     if isinstance(default_prompt, str) and default_prompt != '':
@@ -122,7 +124,7 @@ with shared.gradio_root:
                     
                     def generate_button_click_handler():
                         # Gọi hàm dịch ngôn ngữ khi nút được nhấn
-                        prompt_vn = 'xin chào'
+                        prompt_vn = prompt1.value
                         print('prompt_vn: ', prompt_vn)
                         # prompt.value = translate_text(prompt_vn)
                         # print('prompt_en: ', prompt.value)
@@ -529,7 +531,6 @@ with shared.gradio_root:
         state_is_generating = gr.State(False)
 
         def parse_meta(raw_prompt_txt, is_generating):
-            print('prompt_vn: ', prompt.value)
             loaded_json = None
             try:
                 if '{' in raw_prompt_txt:
