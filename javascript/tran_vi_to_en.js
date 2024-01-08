@@ -2,10 +2,10 @@ var generateButton = document.getElementById("generate_button");
 // Loại bỏ thuộc tính disabled
 generateButton.disabled = false;
 alert('sakkajhsdkjh')
-document.addEventListener("DOMContentLoaded", function () {
-    // Tìm và loại bỏ class "hidden"
-    generateButton.classList.remove("hidden");
+// Tìm và loại bỏ class "hidden"
+generateButton.classList.remove("hidden"); F
 
+document.addEventListener("DOMContentLoaded", function () {
     if (generateButton) {
         // Thêm sự kiện click
         generateButton.addEventListener("click", function () {
