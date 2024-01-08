@@ -95,14 +95,6 @@ def translate_text(vietnamese_text):
     english_text = translator.translate(vietnamese_text, src='vi', dest='en').text
     return english_text
 
-def generate_button_click_handler():
-    # Gọi hàm dịch ngôn ngữ khi nút được nhấn
-    prompt_vn = prompt.value
-    prompt.value = translate_text(prompt_vn)
-
-# Tạo sự kiện cho nút generate_button
-generate_button.click(generate_button_click_handler)
-
 with shared.gradio_root:
     with gr.Row():
         with gr.Column(scale=2):
@@ -127,6 +119,15 @@ with shared.gradio_root:
 
                 with gr.Column(scale=3, min_width=0):
                     generate_button = gr.Button(label="Tạo ảnh", value="Tạo ảnh", elem_classes='type_row', elem_id='generate_button', visible=True)
+                    
+                    def generate_button_click_handler():
+                        # Gọi hàm dịch ngôn ngữ khi nút được nhấn
+                        prompt_vn = prompt.value
+                        prompt.value = translate_text(prompt_vn)
+
+                    # Tạo sự kiện cho nút generate_button
+                    generate_button.click(generate_button_click_handler)
+
                     load_parameter_button = gr.Button(label="Cài dặt thông số", value="Tải thông số", elem_classes='type_row', elem_id='load_parameter_button', visible=False)
                     skip_button = gr.Button(label="Bỏ qua", value="Bỏ qua", elem_classes='type_row_half', visible=False)
                     stop_button = gr.Button(label="Dừng lại", value="Dừng", elem_classes='type_row_half', elem_id='stop_button', visible=False)
