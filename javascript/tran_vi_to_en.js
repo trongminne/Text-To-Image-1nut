@@ -1,3 +1,6 @@
+
+alert('sbdjjsdbj')
+
 document.getElementById('generate_button').addEventListener('click', function() {
     var vietnameseText = document.getElementsByClassName('scroll-hide').value;
     alert(vietnameseText)
@@ -8,4 +11,3 @@ document.getElementById('generate_button').addEventListener('click', function() 
     // Call the generate_image function
     generate_image();
 });
-alert('sbdjjsdbj')
