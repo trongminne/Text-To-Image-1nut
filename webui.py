@@ -123,7 +123,7 @@ with shared.gradio_root:
                     def generate_button_click_handler():
                         # Gọi hàm dịch ngôn ngữ khi nút được nhấn
                         
-                        prompt_vn = "xin chào"
+                        prompt_vn = prompt.value
                         print('prompt_vn: ', prompt.value)
                         prompt.value = translate_text(prompt_vn)
                         print('prompt_en: ', prompt.value)
