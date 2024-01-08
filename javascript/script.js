@@ -5,7 +5,7 @@ window.onload = function () {
         alert('Đã truy cập vào trang web!');
     }
 }
-a
+
 // based on https://github.com/AUTOMATIC1111/stable-diffusion-webui/blob/v1.6.0/script.js
 function gradioApp() {
     const elems = document.getElementsByTagName('gradio-app');
