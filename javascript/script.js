@@ -1,9 +1,7 @@
 window.onload = function () {
-    var promptElements = document.querySelectorAll('[data-testid="textbox"]');
-    console.log(promptElement)
-    if (promptElements.length > 0) {
-        // Lấy phần tử đầu tiên nếu có nhiều phần tử
-        var promptElement = promptElements[0];
+    var promptElement = document.getElementById('positive_prompt');
+    console.log('Prompt Element:', promptElement);
+    if (promptElement) {
         alert('Đã truy cập vào trang web!');
     }
 }
