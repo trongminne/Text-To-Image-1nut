@@ -112,7 +112,7 @@ with shared.gradio_root:
                         lines=1024
                     )
 
-                    iface = gr.Interface(fn=my_function, inputs=prompt, outputs='text')
+                    iface = gr.Interface(inputs=prompt, outputs='text')
                     iface.launch()
                     default_prompt = modules.config.default_prompt
                     if isinstance(default_prompt, str) and default_prompt != '':
