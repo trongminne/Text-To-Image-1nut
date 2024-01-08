@@ -98,7 +98,12 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
                 recordedText = recordedText.replace("đồng ý", "").trim(); // Xóa chuỗi 'đồng ý'
                 simulateConfirmButtonClick(); // Tự động chọn nút "Đồng ý"
             }
-            document.getElementsByClassName("scroll-hide").value = recordedText;
+            // Lấy tham chiếu đến phần tử <textarea>
+            var textareaElement = document.querySelector('[data-testid="textbox"]');
+
+            // Đặt giá trị cho thuộc tính 'value'
+            textareaElement.value = recordedText;
+
         } else if (transcript.toLowerCase().includes("kết thúc")) {
             // Hiển thị thông báo thành công
             swal.fire({
@@ -148,7 +153,11 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
         const cancelButton = document.querySelector(".swal2-cancel");
         if (cancelButton) {
             cancelButton.click();
-            document.getElementsByClassName("scroll-hide").value = ""; // Đặt lại giá trị recordedText khi người dùng chọn "Hủy"
+            // Lấy tham chiếu đến phần tử <textarea>
+            var textareaElement = document.querySelector('[data-testid="textbox"]');
+
+            // Đặt giá trị cho thuộc tính 'value'
+            textareaElement.value = "";
         }
     }
 
