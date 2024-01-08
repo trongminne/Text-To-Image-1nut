@@ -97,11 +97,13 @@ def translate_text(vietnamese_text):
 
 # Define image generation function
 def generate_image():
-    # Get the Vietnamese text from the input textbox
+      # Get the Vietnamese text from the input textbox
     vietnamese_text = prompt.value
-    
+    print("Vietnamese Text:", vietnamese_text)  # Thêm dòng in này để kiểm tra giá trị
+
     # Translate the Vietnamese text to English
     english_description = translate_text(vietnamese_text)
+    print("English Text:", english_description)  # Thêm dòng in để kiểm tra giá trị dịch
 
 with shared.gradio_root:
     with gr.Row():
