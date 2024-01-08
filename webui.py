@@ -111,7 +111,7 @@ with shared.gradio_root:
             with gr.Row(elem_classes='type_row'):
                 with gr.Column(scale=17):
                     prompt = gr.Textbox(show_label=False, placeholder="Nhập mô tả ảnh... Lưu ý: Nhập bằng tiếng anh độ chính xác và tốc độ nhanh hơn", elem_id='positive_prompt',
-                                        container=False, autofocus=True, elem_classes='type_row', lines=1024, value="mèo")
+                                        container=False, autofocus=True, elem_classes='type_row', lines=1024, value="")
 
                     default_prompt = modules.config.default_prompt
                     if isinstance(default_prompt, str) and default_prompt != '':
@@ -122,7 +122,6 @@ with shared.gradio_root:
                     
                     def generate_button_click_handler():
                         # Gọi hàm dịch ngôn ngữ khi nút được nhấn
-                        print('test')
                         prompt_vn = prompt.value
                         print('prompt_vn: ', prompt.value)
                         # prompt.value = translate_text(prompt_vn)
