@@ -1,14 +1,14 @@
-
 var generateButton = document.getElementById("generate_button");
 
-// Thêm sự kiện click
 generateButton.addEventListener("click", function () {
-    var vietnameseText = document.getElementsByClassName('scroll-hide').value;
-    alert(vietnameseText)
-    // Call the translate_text function
+    var vietnameseText = document.querySelector('.scroll-hide').value;
+    alert(vietnameseText);
+
+    // Kiểm tra xem các hàm có được định nghĩa đúng không
+    console.log("Calling translate_text...");
     var englishText = translate_text(vietnameseText);
     console.log("English Text:", englishText);
 
-    // Call the generate_image function
+    console.log("Calling generate_image...");
     generate_image();
 });
