@@ -1,12 +1,17 @@
-
-alert('sbdjhsahjdg')
+// Hàm hiển thị cảnh báo khi trang web được tải
+window.onload = function () {
+    var promptElement = document.getElementById('positive_prompt');
+    if (promptElement) {
+        alert('Đã truy cập vào trang web!');
+    }
+}
 // based on https://github.com/AUTOMATIC1111/stable-diffusion-webui/blob/v1.6.0/script.js
 function gradioApp() {
     const elems = document.getElementsByTagName('gradio-app');
     const elem = elems.length == 0 ? document : elems[0];
 
     if (elem !== document) {
-        elem.getElementById = function(id) {
+        elem.getElementById = function (id) {
             return document.getElementById(id);
         };
     }
@@ -98,15 +103,15 @@ function executeCallbacks(queue, arg) {
  */
 function scheduleAfterUiUpdateCallbacks() {
     clearTimeout(uiAfterUpdateTimeout);
-    uiAfterUpdateTimeout = setTimeout(function() {
+    uiAfterUpdateTimeout = setTimeout(function () {
         executeCallbacks(uiAfterUpdateCallbacks);
     }, 200);
 }
 
 var executedOnLoaded = false;
 
-document.addEventListener("DOMContentLoaded", function() {
-    var mutationObserver = new MutationObserver(function(m) {
+document.addEventListener("DOMContentLoaded", function () {
+    var mutationObserver = new MutationObserver(function (m) {
         if (!executedOnLoaded && gradioApp().querySelector('#generate_button')) {
             executedOnLoaded = true;
             executeCallbacks(uiLoadedCallbacks);
@@ -120,17 +125,17 @@ document.addEventListener("DOMContentLoaded", function() {
             executeCallbacks(uiTabChangeCallbacks);
         }
     });
-    mutationObserver.observe(gradioApp(), {childList: true, subtree: true});
+    mutationObserver.observe(gradioApp(), { childList: true, subtree: true });
 });
 
 /**
  * Add a ctrl+enter as a shortcut to start a generation
  */
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', function (e) {
     const isModifierKey = (e.metaKey || e.ctrlKey || e.altKey);
     const isEnterKey = (e.key == "Enter" || e.keyCode == 13);
 
-    if(isModifierKey && isEnterKey) {
+    if (isModifierKey && isEnterKey) {
         const generateButton = gradioApp().querySelector('button:not(.hidden)[id=generate_button]');
         if (generateButton) {
             generateButton.click();
@@ -139,7 +144,7 @@ document.addEventListener('keydown', function(e) {
         }
 
         const stopButton = gradioApp().querySelector('button:not(.hidden)[id=stop_button]')
-        if(stopButton) {
+        if (stopButton) {
             stopButton.click();
             e.preventDefault();
             return;
