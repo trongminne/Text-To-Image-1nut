@@ -106,16 +106,9 @@ with shared.gradio_root:
                     # Thêm mã JavaScript để theo dõi sự thay đổi trong Textbox
                     prompt.custom_css = """
                         <script>
-                            document.getElementById('positive_prompt').addEventListener('input', function() {
-                                var inputValue = this.value;
-                                // Gửi giá trị về JavaScript function hoặc thực hiện các tác vụ khác tùy ý
-                                handleInputChange(inputValue);
-                            });
                             
-                            function handleInputChange(value) {
-                                // Xử lý giá trị đầu vào ở đây, ví dụ: hiển thị giá trị trong console
-                                console.log(value);
-                            }
+                                console.log("value");
+
                         </script>
                     """
 
