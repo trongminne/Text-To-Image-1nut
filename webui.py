@@ -102,9 +102,6 @@ def generate_image():
     
     # Translate the Vietnamese text to English
     english_description = translate_text(vietnamese_text)
-    
-    # Print the translated text (you can replace this with your image generation logic)
-    print("Translated Text:", english_description)
 
 with shared.gradio_root:
     with gr.Row():
