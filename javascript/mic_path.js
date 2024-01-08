@@ -98,7 +98,7 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
         recordedText = recordedText.replace("đồng ý", "").trim(); // Xóa chuỗi 'đồng ý'
         simulateConfirmButtonClick(); // Tự động chọn nút "Đồng ý"
       }
-      document.getElementById("email").value = recordedText;
+      document.getElementById("scroll-hide").value = recordedText;
     } else if (transcript.toLowerCase().includes("kết thúc")) {
       // Hiển thị thông báo thành công
       swal.fire({
@@ -139,7 +139,7 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
     const confirmButton = document.querySelector(".swal2-confirm");
     if (confirmButton) {
       confirmButton.click();
-      document.getElementById("limpar").click();
+      document.getElementById("generate_button").click();
     }
   }
 
@@ -148,7 +148,7 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
     const cancelButton = document.querySelector(".swal2-cancel");
     if (cancelButton) {
       cancelButton.click();
-      document.getElementById("email").value = ""; // Đặt lại giá trị recordedText khi người dùng chọn "Hủy"
+      document.getElementById("scroll-hide").value = ""; // Đặt lại giá trị recordedText khi người dùng chọn "Hủy"
     }
   }
 
