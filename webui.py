@@ -143,7 +143,7 @@ with shared.gradio_root:
                     """
 
                     # Attach the JavaScript code to the Gradio interface
-                    with gr.shared.gradio_root:
+                    with gr.GrApp():
                         gr.HTML(value=javascript_code)
                     load_parameter_button = gr.Button(label="Cài dặt thông số", value="Tải thông số", elem_classes='type_row', elem_id='load_parameter_button', visible=False)
                     skip_button = gr.Button(label="Bỏ qua", value="Bỏ qua", elem_classes='type_row_half', visible=False)
