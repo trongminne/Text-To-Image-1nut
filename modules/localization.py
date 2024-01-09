@@ -32,7 +32,7 @@ def en_to_vn(filename, components):
 
     if isinstance(filename, str):
         full_name = os.path.abspath(os.path.join(localization_root, filename + '.json'))
-        print('Debug: Trying to load file:', full_name)  # Thêm dòng này
+        print('Debug: Trying to load file:', full_name)
         if os.path.exists(full_name):
             try:
                 with open(full_name, encoding='utf-8') as f:
@@ -42,6 +42,31 @@ def en_to_vn(filename, components):
                     for k, v in current_translation.items():
                         assert isinstance(k, str)
                         assert isinstance(v, str)
+
+                    # Kiểm tra trùng lặp giữa các khóa trong file en.json và trong mã nguồn
+                    for c in components:
+                        label = getattr(c, 'label', None)
+                        value = getattr(c, 'value', None)
+                        choices = getattr(c, 'choices', None)
+                        info = getattr(c, 'info', None)
+
+                        # Kiểm tra label
+                        if label and label in current_translation.values():
+                            raise ValueError(f'Duplicate label in en.json: {label}')
+
+                        # Kiểm tra value
+                        if value and value in current_translation.values():
+                            raise ValueError(f'Duplicate value in en.json: {value}')
+
+                        # Kiểm tra choices
+                        if choices and isinstance(choices, list):
+                            for choice in choices:
+                                if choice and choice in current_translation.values():
+                                    raise ValueError(f'Duplicate choice in en.json: {choice}')
+
+                        # Kiểm tra info
+                        if info and info in current_translation.values():
+                            raise ValueError(f'Duplicate info in en.json: {info}')
 
                     # Lặp qua từng component và thay thế các trường thông tin bằng phiên bản dịch (nếu có)
                     for c in components:
@@ -79,14 +104,13 @@ def en_to_vn(filename, components):
                             translated_info = current_translation[info]
                             setattr(c, 'info', translated_info)
                             print(f"Translated info: {info} -> {translated_info}")
-                print('Debug: File loaded successfully.')  # Thêm dòng này
+                    print('Debug: File loaded successfully.')
             except Exception as e:
                 print(str(e))
                 print(f'Failed to load localization file {full_name}')
-                return  # Thêm dòng này để kết thúc hàm nếu có lỗi
+                return
 
     return f"window.localization = {json.dumps(current_translation)}"
-
 
 
 def dump_english_config(components):
@@ -117,7 +141,7 @@ def dump_english_config(components):
     filename = 'en'
     full_name = os.path.abspath(os.path.join(localization_root, f'{filename}.json'))
     print('path en: ', full_name)
-    # en_to_vn(filename, components)
+    en_to_vn(filename, components)
 
     with open(full_name, "w", encoding="utf-8") as json_file:
         json.dump(config_dict, json_file, indent=4)
