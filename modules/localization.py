@@ -9,7 +9,7 @@ def localization_js(components):
     global current_translation
 
     if isinstance(filename, str):
-        full_name = os.path.abspath(os.path.join(localization_root, filename + '.json'))
+        full_name = os.path.abspath(os.path.join(localization_root, 'en.json'))
         print('Debug: Trying to load file:', full_name)  # Thêm dòng này
         if os.path.exists(full_name):
             try:
