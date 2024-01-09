@@ -93,7 +93,7 @@ def dump_english_config(components):
     filename = 'en'
     full_name = os.path.abspath(os.path.join(localization_root, f'{filename}.json'))
     print('path en: ', full_name)
-    localization_js(filename, components)
+    localization_js(components)
 
     with open(full_name, "w", encoding="utf-8") as json_file:
         json.dump(config_dict, json_file, indent=4)
