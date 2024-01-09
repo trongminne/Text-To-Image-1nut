@@ -580,7 +580,7 @@ with shared.gradio_root:
             load_parameter_button
         ] + lora_ctrls, queue=False, show_progress=False)
 
-        generate_button.click(lambda: (print("Current value of prompt:", prompt.value), (gr.update(visible=True, interactive=True), gr.update(visible=True, interactive=True), gr.update(visible=False, interactive=False), [], True),
+        generate_button.click(lambda: (print("Current value of prompt:", prompt.value), gr.update(visible=True, interactive=True), gr.update(visible=True, interactive=True), gr.update(visible=False, interactive=False), [], True),
                               outputs=[stop_button, skip_button, generate_button, gallery, state_is_generating]) \
             .then(fn=refresh_seed, inputs=[seed_random, image_seed], outputs=image_seed) \
             .then(advanced_parameters.set_all_advanced_parameters, inputs=adps) \
