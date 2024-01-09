@@ -312,7 +312,7 @@ default_overwrite_switch = get_config_item_or_set_default(
 example_inpaint_prompts = get_config_item_or_set_default(
     key='example_inpaint_prompts',
     default_value=[
-        'highly detailed face', 'detailed girl face', 'detailed man face', 'detailed hand', 'beautiful eyes'
+        'khuôn mặt chi tiết cao cấp', 'khuôn mặt cô gái chi tiết', 'khuôn mặt người chi tiết', 'bàn tay chi tiết', 'đôi mắt đẹp'
     ],
     validator=lambda x: isinstance(x, list) and all(isinstance(v, str) for v in x)
 )
