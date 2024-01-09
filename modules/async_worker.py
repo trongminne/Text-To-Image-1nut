@@ -709,13 +709,13 @@ def worker():
                     zsnr=False)[0]
             print('Using lcm scheduler.')
 
-        async_task.yields.append(['preview', (13, 'Moving model to GPU ...', None)])
+        async_task.yields.append(['preview', (13, 'Đang chuyển đối tượng mô hình lên GPU...', None)])
 
         def callback(step, x0, x, total_steps, y):
             done_steps = current_task_id * steps + step
             async_task.yields.append(['preview', (
                 int(15.0 + 85.0 * float(done_steps) / float(all_steps)),
-                f'Step {step}/{total_steps} in the {current_task_id + 1}-th Sampling',
+                f'Bước {step}/{total_steps} trong việc Lấy mẫu thứ {current_task_id + 1}',
                 y)])
 
         for current_task_id, task in enumerate(tasks):
