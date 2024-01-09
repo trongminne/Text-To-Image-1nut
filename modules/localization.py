@@ -59,5 +59,13 @@ def dump_english_config(components):
 
     with open(full_name, "w", encoding="utf-8") as json_file:
         json.dump(config_dict, json_file, indent=4)
-
+    # In ra nội dung của en.json ngay sau khi ghi
+    try:
+        with open(full_name, encoding='utf-8') as f:
+            en_json_content = json.load(f)
+            print('Content of en.json after writing:')
+            print(json.dumps(en_json_content, indent=4))
+    except Exception as e:
+        print(str(e))
+        print(f'Failed to read en.json file: {full_name}')
     return
