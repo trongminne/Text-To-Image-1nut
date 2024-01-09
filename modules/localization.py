@@ -5,11 +5,33 @@ import os
 current_translation = {}
 localization_root = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'language')
 
-def localization_js(components):
+
+def localization_js(filename):
     global current_translation
 
     if isinstance(filename, str):
-        full_name = os.path.abspath(os.path.join(localization_root, 'en.json'))
+        full_name = os.path.abspath(os.path.join(localization_root, filename + '.json'))
+        if os.path.exists(full_name):
+            try:
+                with open(full_name, encoding='utf-8') as f:
+                    current_translation = json.load(f)
+                    assert isinstance(current_translation, dict)
+                    for k, v in current_translation.items():
+                        assert isinstance(k, str)
+                        assert isinstance(v, str)
+            except Exception as e:
+                print(str(e))
+                print(f'Failed to load localization file {full_name}')
+
+    # current_translation = {k: 'XXX' for k in current_translation.keys()}  # use this to see if all texts are covered
+
+    return f"window.localization = {json.dumps(current_translation)}"
+
+def en_to_vn(filename, components):
+    global current_translation
+
+    if isinstance(filename, str):
+        full_name = os.path.abspath(os.path.join(localization_root, filename + '.json'))
         print('Debug: Trying to load file:', full_name)  # Thêm dòng này
         if os.path.exists(full_name):
             try:
@@ -66,7 +88,9 @@ def localization_js(components):
     return f"window.localization = {json.dumps(current_translation)}"
 
 
+
 def dump_english_config(components):
+
     all_texts = []
     for c in components:
         label = getattr(c, 'label', None)
@@ -93,7 +117,7 @@ def dump_english_config(components):
     filename = 'en'
     full_name = os.path.abspath(os.path.join(localization_root, f'{filename}.json'))
     print('path en: ', full_name)
-    localization_js(components)
+    en_to_vn(filename, components)
 
     with open(full_name, "w", encoding="utf-8") as json_file:
         json.dump(config_dict, json_file, indent=4)
