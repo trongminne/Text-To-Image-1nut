@@ -215,12 +215,13 @@ default_scheduler = get_config_item_or_set_default(
 default_styles = get_config_item_or_set_default(
     key='default_styles',
     default_value=[
-        "Fooocus V2",
-        "Fooocus Enhance",
-        "Fooocus Sharp"
+        "Tập trung V2",
+        "Tập trung Nâng cao",
+        "Tập trung Sắc nét"
     ],
     validator=lambda x: isinstance(x, list) and all(y in modules.sdxl_styles.legal_style_names for y in x)
 )
+
 default_prompt_negative = get_config_item_or_set_default(
     key='default_prompt_negative',
     default_value='',

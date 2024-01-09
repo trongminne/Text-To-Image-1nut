@@ -341,7 +341,7 @@ with shared.gradio_root:
                                                    info='Khi nào kết thúc hướng dẫn từ ADM tích cực/tiêu cực.')
                         
                         refiner_swap_method = gr.Dropdown(label='Phương pháp đổi Mô hình Tinh chỉnh', value='joint',
-                                                          choices=['joint', 'separate', 'vae'])
+                                                          choices=['chung', 'riêng lẻ', 'vae'])
                         
                         adaptive_cfg = gr.Slider(label='CFG Mô phỏng từ TSNR', minimum=1.0, maximum=30.0, step=0.01,
                                                  value=modules.config.default_cfg_tsnr,
@@ -611,7 +611,7 @@ with shared.gradio_root:
 def dump_default_english_config():
     from modules.localization import dump_english_config
     dump_english_config(grh.all_components)
-dump_default_english_config()
+# dump_default_english_config()
 
 shared.gradio_root.launch(
     inbrowser=args_manager.args.in_browser,
