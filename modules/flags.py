@@ -1,5 +1,5 @@
-disabled = 'Disabled'
-enabled = 'Enabled'
+disabled = 'Tắt'
+enabled = 'Bật'
 subtle_variation = 'Biến đổi nhẹ'
 strong_variation = 'Biến đổi mạnh'
 upscale_15 = 'Phóng lớn (1.5x)'
@@ -33,7 +33,8 @@ default_parameters = {
 }  # dừng, trọng số
 
 inpaint_engine_versions = ['Không có', 'v1', 'v2.5', 'v2.6']
-performance_selections = ['Speed', 'Quality', 'Extreme Speed']
+performance_selections = ['Tốc độ', 'Chất lượng', 'Tốc độ cực kỳ']
+performance_selections1 = ['Speed', 'Quality', 'Extreme Speed']
 
 inpaint_option_default = 'Vẽ lại hoặc Xoá bỏ (mặc định)'
 inpaint_option_detail = 'Cải thiện chi tiết (khuôn mặt, tay, mắt, v.v.)'
