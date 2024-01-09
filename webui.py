@@ -146,7 +146,7 @@ with shared.gradio_root:
                     with gr.TabItem(label='Mở rộng, tăng cường') as uov_tab:
                         with gr.Row():
                             with gr.Column():
-                                uov_input_image = grh.Image(label='Kéo ảnh ở trên đây', source='upload', type='numpy')
+                                uov_input_image = grh.Image(label='Kéo ảnh vào đây', source='upload', type='numpy')
                             with gr.Column():
                                 uov_method = gr.Radio(label='Mở rộng kích thước hoặc Biến thể:', choices=flags.uov_list, value=flags.disabled)
                     with gr.TabItem(label='Gợi ý hình ảnh') as ip_tab:
@@ -192,7 +192,7 @@ with shared.gradio_root:
                                            outputs=ip_ad_cols + ip_types + ip_stops + ip_weights,
                                            queue=False, show_progress=False)
                     with gr.TabItem(label='Chỉnh sửa, mở rộng') as inpaint_tab:
-                        inpaint_input_image = grh.Image(label='Kéo ảnh từ trên xuống đây', source='upload', type='numpy', tool='sketch', height=500, brush_color="#FFFFFF", elem_id='inpaint_canvas')
+                        inpaint_input_image = grh.Image(label='Kéo ảnh vào đây', source='upload', type='numpy', tool='sketch', height=500, brush_color="#FFFFFF", elem_id='inpaint_canvas')
                         with gr.Row():
                             inpaint_additional_prompt = gr.Textbox(placeholder="Miêu tả những gì bạn muốn chỉnh sửa ảnh", elem_id='inpaint_additional_prompt', label='Miêu tả những gì bạn muốn chỉnh ảnh', visible=False)
                             outpaint_selections = gr.CheckboxGroup(choices=['Trái', 'Phải', 'Trên', 'Dưới'], value=[], label='Hướng mở rộng ảnh')
@@ -202,7 +202,7 @@ with shared.gradio_root:
                     with gr.TabItem(label='Mô tả ảnh') as desc_tab:
                         with gr.Row():
                             with gr.Column():
-                                desc_input_image = grh.Image(label='Kéo bất kỳ ảnh nào đến đây', source='upload', type='numpy')
+                                desc_input_image = grh.Image(label='Kéo ảnh vào đây', source='upload', type='numpy')
                             with gr.Column():
                                 desc_method = gr.Radio(
                                     label='Loại ảnh',
