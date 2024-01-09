@@ -5,7 +5,7 @@ import os
 current_translation = {}
 localization_root = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'language')
 
-def localization_js(filename):
+def localization_js(filename, components):
     global current_translation
 
     if isinstance(filename, str):
@@ -93,7 +93,7 @@ def dump_english_config(components):
     filename = 'en'
     full_name = os.path.abspath(os.path.join(localization_root, f'{filename}.json'))
     print('path en: ', full_name)
-    localization_js(filename)
+    localization_js(filename, components)
 
     with open(full_name, "w", encoding="utf-8") as json_file:
         json.dump(config_dict, json_file, indent=4)
