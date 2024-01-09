@@ -178,7 +178,7 @@ def worker():
 
         if performance_selection == 'Extreme Speed':
             print('Enter LCM mode.')
-            progressbar(async_task, 1, 'Downloading LCM components ...')
+            progressbar(async_task, 1, 'Tải xuống các thành phần LCM (Least Common Multiple)...')
             loras += [(modules.config.downloading_sdxl_lcm_lora(), 1.0)]
 
             if refiner_model_name != 'None':
@@ -267,7 +267,7 @@ def worker():
                         if performance_selection == 'Extreme Speed':
                             steps = 8
 
-                    progressbar(async_task, 1, 'Downloading upscale models ...')
+                    progressbar(async_task, 1, 'Đang tải các mô hình nâng cấp (upscale)...')
                     modules.config.downloading_upscale_model()
             if (current_tab == 'inpaint' or (
                     current_tab == 'ip' and advanced_parameters.mixing_image_prompt_and_inpaint)) \
@@ -277,10 +277,10 @@ def worker():
                 inpaint_image = HWC3(inpaint_image)
                 if isinstance(inpaint_image, np.ndarray) and isinstance(inpaint_mask, np.ndarray) \
                         and (np.any(inpaint_mask > 127) or len(outpaint_selections) > 0):
-                    progressbar(async_task, 1, 'Downloading upscale models ...')
+                    progressbar(async_task, 1, 'Đang tải các mô hình nâng cấp (upscale)...')
                     modules.config.downloading_upscale_model()
                     if inpaint_parameterized:
-                        progressbar(async_task, 1, 'Downloading inpainter ...')
+                        progressbar(async_task, 1, 'Đang tải xuống mô hình inpainter...')
                         inpaint_head_model_path, inpaint_patch_model_path = modules.config.downloading_inpaint_models(
                             advanced_parameters.inpaint_engine)
                         base_model_additional_loras += [(inpaint_patch_model_path, 1.0)]
@@ -301,7 +301,7 @@ def worker():
                     advanced_parameters.mixing_image_prompt_and_inpaint or \
                     advanced_parameters.mixing_image_prompt_and_vary_upscale:
                 goals.append('cn')
-                progressbar(async_task, 1, 'Downloading control models ...')
+                progressbar(async_task, 1, 'Đang tải xuống các mô hình điều khiển...')
                 if len(cn_tasks[flags.cn_canny]) > 0:
                     controlnet_canny_path = modules.config.downloading_controlnet_canny()
                 if len(cn_tasks[flags.cn_cpds]) > 0:
@@ -311,7 +311,7 @@ def worker():
                 if len(cn_tasks[flags.cn_ip_face]) > 0:
                     clip_vision_path, ip_negative_path, ip_adapter_face_path = modules.config.downloading_ip_adapters(
                         'face')
-                progressbar(async_task, 1, 'Loading control models ...')
+                progressbar(async_task, 1, 'Đang tải mô hình điều khiển...')
 
         # Load or unload CNs
         pipeline.refresh_controlnets([controlnet_canny_path, controlnet_cpds_path])
@@ -352,12 +352,12 @@ def worker():
             extra_positive_prompts = prompts[1:] if len(prompts) > 1 else []
             extra_negative_prompts = negative_prompts[1:] if len(negative_prompts) > 1 else []
 
-            progressbar(async_task, 3, 'Loading models ...')
+            progressbar(async_task, 3, 'Đang tải models ...')
             pipeline.refresh_everything(refiner_model_name=refiner_model_name, base_model_name=base_model_name,
                                         loras=loras, base_model_additional_loras=base_model_additional_loras,
                                         use_synthetic_refiner=use_synthetic_refiner)
 
-            progressbar(async_task, 3, 'Processing prompts ...')
+            progressbar(async_task, 3, 'Đang xử lý các yêu cầu...')
             tasks = []
             for i in range(image_number):
                 task_seed = (seed + i) % (constants.MAX_SEED + 1)  # randint is inclusive, % is not

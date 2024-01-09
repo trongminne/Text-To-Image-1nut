@@ -208,7 +208,7 @@ with shared.gradio_root:
                                     label='Loại ảnh',
                                     choices=[flags.desc_type_photo, flags.desc_type_anime],
                                     value=flags.desc_type_photo)
-                                desc_btn = gr.Button(value='Mô tả hình ảnh này thành câu gợi ý.')
+                                desc_btn = gr.Button(value='Mô tả hình ảnh này')
             switch_js = "(x) => {if(x){viewer_to_bottom(100);viewer_to_bottom(500);}else{viewer_to_top();} return x;}"
             down_js = "() => {viewer_to_bottom();}"
 
@@ -315,12 +315,12 @@ with shared.gradio_root:
                         with gr.Row():
                             lora_model = gr.Dropdown(label=f'LoRA {i + 1}',
                                                      choices=['None'] + modules.config.lora_filenames, value=n)
-                            lora_weight = gr.Slider(label='Weight', minimum=-2, maximum=2, step=0.01, value=v,
+                            lora_weight = gr.Slider(label='Ngang', minimum=-2, maximum=2, step=0.01, value=v,
                                                     elem_classes='lora_weight')
                             lora_ctrls += [lora_model, lora_weight]
 
                 with gr.Row():
-                    model_refresh = gr.Button(label='Làm mới', value='\U0001f504 Refresh All Files', variant='secondary', elem_classes='refresh_button')
+                    model_refresh = gr.Button(label='Làm mới', value='\U0001f504 Làm mới tất cả các tệp', variant='secondary', elem_classes='refresh_button')
             with gr.Tab(label='Nâng cao'):
                 guidance_scale = gr.Slider(label='Tỉ lệ Hướng dẫn', minimum=1.0, maximum=30.0, step=0.01,
                                            value=modules.config.default_cfg_scale,
@@ -347,9 +347,9 @@ with shared.gradio_root:
                                                  value=modules.config.default_cfg_tsnr,
                                                  info='Kích hoạt việc mô phỏng CFG từ TSNR '
                                                       '(hiệu quả khi CFG thực > CFG mô phỏng).')
-                        sampler_name = gr.Dropdown(label='Sampler', choices=flags.sampler_list,
+                        sampler_name = gr.Dropdown(label='Bộ lấy mẫu', choices=flags.sampler_list,
                                                    value=modules.config.default_sampler)
-                        scheduler_name = gr.Dropdown(label='Scheduler', choices=flags.scheduler_list,
+                        scheduler_name = gr.Dropdown(label='Lập lịch', choices=flags.scheduler_list,
                                                      value=modules.config.default_scheduler)
                         
                         generate_image_grid = gr.Checkbox(label='Tạo lưới ảnh cho mỗi Batch',
