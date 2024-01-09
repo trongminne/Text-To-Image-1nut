@@ -400,7 +400,7 @@ def worker():
                     negative_top_k=len(negative_basic_workloads),
                     log_positive_prompt='\n'.join([task_prompt] + task_extra_positive_prompts),
                     log_negative_prompt='\n'.join([task_negative_prompt] + task_extra_negative_prompts),
-                ))1
+                ))
 
             if use_expansion:
                 for i, t in enumerate(tasks):
