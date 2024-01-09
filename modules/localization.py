@@ -13,7 +13,7 @@ def localization_js(filename):
         print('Debug: Trying to load file:', full_name)  # Thêm dòng này
         if os.path.exists(full_name):
             try:
-               with open(full_name, encoding='utf-8') as f:
+                with open(full_name, encoding='utf-8') as f:
                     current_translation = json.load(f)
                     assert isinstance(current_translation, dict)
 
@@ -57,7 +57,6 @@ def localization_js(filename):
                             translated_info = current_translation[info]
                             setattr(c, 'info', translated_info)
                             print(f"Translated info: {info} -> {translated_info}")
-
                 print('Debug: File loaded successfully.')  # Thêm dòng này
             except Exception as e:
                 print(str(e))
