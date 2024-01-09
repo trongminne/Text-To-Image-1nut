@@ -443,7 +443,7 @@ def worker():
             uov_input_image = set_image_shape_ceil(uov_input_image, shape_ceil)
 
             initial_pixels = core.numpy_to_pytorch(uov_input_image)
-            progressbar(async_task, 13, 'VAE encoding ...')
+            progressbar(async_task, 13, 'VAE mã hoá ...')
 
             candidate_vae, _ = pipeline.get_candidate_vae(
                 steps=steps,
@@ -505,7 +505,7 @@ def worker():
                 denoising_strength = advanced_parameters.overwrite_upscale_strength
 
             initial_pixels = core.numpy_to_pytorch(uov_input_image)
-            progressbar(async_task, 13, 'VAE encoding ...')
+            progressbar(async_task, 13, 'VAE mã hoá ...')
 
             candidate_vae, _ = pipeline.get_candidate_vae(
                 steps=steps,
@@ -563,7 +563,7 @@ def worker():
                              do_not_show_finished_images=True)
                 return
 
-            progressbar(async_task, 13, 'VAE Inpaint encoding ...')
+            progressbar(async_task, 13, 'VAE Mã hóa nội bộ ...')
 
             inpaint_pixel_fill = core.numpy_to_pytorch(inpaint_worker.current_task.interested_fill)
             inpaint_pixel_image = core.numpy_to_pytorch(inpaint_worker.current_task.interested_image)
@@ -583,12 +583,12 @@ def worker():
 
             latent_swap = None
             if candidate_vae_swap is not None:
-                progressbar(async_task, 13, 'VAE SD15 encoding ...')
+                progressbar(async_task, 13, 'VAE SD15 mã hoá ...')
                 latent_swap = core.encode_vae(
                     vae=candidate_vae_swap,
                     pixels=inpaint_pixel_fill)['samples']
 
-            progressbar(async_task, 13, 'VAE encoding ...')
+            progressbar(async_task, 13, 'VAE mã hoá ...')
             latent_fill = core.encode_vae(
                 vae=candidate_vae,
                 pixels=inpaint_pixel_fill)['samples']
