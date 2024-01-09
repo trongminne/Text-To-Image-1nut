@@ -119,14 +119,6 @@ with shared.gradio_root:
 
                 with gr.Column(scale=3, min_width=0):
                     generate_button = gr.Button(label="Tạo ảnh", value="Tạo ảnh", elem_classes='type_row', elem_id='generate_button', visible=True)
-                    
-                    # def generate_button_click_handler():
-                    #     # Gọi hàm dịch ngôn ngữ khi nút được nhấn
-                    #     prompt_vn = prompt.value
-                    #     print('prompt_vn: ', prompt_vn)
-                    #     # prompt.value = translate_text(prompt_vn)
-                    #     # print('prompt_en: ', prompt.value)
-
                     load_parameter_button = gr.Button(label="Cài dặt thông số", value="Tải thông số", elem_classes='type_row', elem_id='load_parameter_button', visible=False)
                     skip_button = gr.Button(label="Bỏ qua", value="Bỏ qua", elem_classes='type_row_half', visible=False)
                     stop_button = gr.Button(label="Dừng lại", value="Dừng", elem_classes='type_row_half', elem_id='stop_button', visible=False)
@@ -199,10 +191,10 @@ with shared.gradio_root:
                         ip_advanced.change(ip_advance_checked, inputs=ip_advanced,
                                            outputs=ip_ad_cols + ip_types + ip_stops + ip_weights,
                                            queue=False, show_progress=False)
-                    with gr.TabItem(label='Khôi phục, mở rộng') as inpaint_tab:
+                    with gr.TabItem(label='Chỉnh sửa, mở rộng') as inpaint_tab:
                         inpaint_input_image = grh.Image(label='Kéo ảnh từ trên xuống đây', source='upload', type='numpy', tool='sketch', height=500, brush_color="#FFFFFF", elem_id='inpaint_canvas')
                         with gr.Row():
-                            inpaint_additional_prompt = gr.Textbox(placeholder="Miêu tả những gì bạn muốn khôi phục ảnh.", elem_id='inpaint_additional_prompt', label='Inpaint Additional Prompt', visible=False)
+                            inpaint_additional_prompt = gr.Textbox(placeholder="Miêu tả những gì bạn muốn chỉnh sửa ảnh", elem_id='inpaint_additional_prompt', label='Miêu tả những gì bạn muốn chỉnh ảnh', visible=False)
                             outpaint_selections = gr.CheckboxGroup(choices=['Trái', 'Phải', 'Trên', 'Dưới'], value=[], label='Hướng mở rộng ảnh')
                             inpaint_mode = gr.Dropdown(choices=modules.flags.inpaint_options, value=modules.flags.inpaint_option_default, label='Phương pháp')
                         example_inpaint_prompts = gr.Dataset(samples=modules.config.example_inpaint_prompts, label='Danh sách Yêu Cầu Bổ Sung Nhanh', components=[inpaint_additional_prompt], visible=False)
@@ -213,7 +205,7 @@ with shared.gradio_root:
                                 desc_input_image = grh.Image(label='Kéo bất kỳ ảnh nào đến đây', source='upload', type='numpy')
                             with gr.Column():
                                 desc_method = gr.Radio(
-                                    label='Content Type',
+                                    label='Loại ảnh',
                                     choices=[flags.desc_type_photo, flags.desc_type_anime],
                                     value=flags.desc_type_photo)
                                 desc_btn = gr.Button(value='Mô tả hình ảnh này thành câu gợi ý.')
