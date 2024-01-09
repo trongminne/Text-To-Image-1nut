@@ -13,12 +13,14 @@ def localization_js(filename):
         print('Debug: Trying to load file:', full_name)  # Thêm dòng này
         if os.path.exists(full_name):
             try:
-                with open(full_name, encoding='utf-8') as f:
+               with open(full_name, encoding='utf-8') as f:
                     current_translation = json.load(f)
                     assert isinstance(current_translation, dict)
+
                     for k, v in current_translation.items():
                         assert isinstance(k, str)
                         assert isinstance(v, str)
+
                     # Lặp qua từng component và thay thế các trường thông tin bằng phiên bản dịch (nếu có)
                     for c in components:
                         label = getattr(c, 'label', None)
@@ -28,25 +30,34 @@ def localization_js(filename):
 
                         # Dịch label
                         if label and label in current_translation:
-                            setattr(c, 'label', current_translation[label])
+                            translated_label = current_translation[label]
+                            setattr(c, 'label', translated_label)
+                            print(f"Translated label: {label} -> {translated_label}")
 
                         # Dịch value
                         if value and value in current_translation:
-                            setattr(c, 'value', current_translation[value])
+                            translated_value = current_translation[value]
+                            setattr(c, 'value', translated_value)
+                            print(f"Translated value: {value} -> {translated_value}")
 
                         # Dịch choices
                         if choices and isinstance(choices, list):
                             new_choices = []
                             for choice in choices:
                                 if choice and choice in current_translation:
-                                    new_choices.append(current_translation[choice])
+                                    translated_choice = current_translation[choice]
+                                    new_choices.append(translated_choice)
+                                    print(f"Translated choice: {choice} -> {translated_choice}")
                                 else:
                                     new_choices.append(choice)
                             setattr(c, 'choices', new_choices)
 
                         # Dịch info
                         if info and info in current_translation:
-                            setattr(c, 'info', current_translation[info])
+                            translated_info = current_translation[info]
+                            setattr(c, 'info', translated_info)
+                            print(f"Translated info: {info} -> {translated_info}")
+
                 print('Debug: File loaded successfully.')  # Thêm dòng này
             except Exception as e:
                 print(str(e))
