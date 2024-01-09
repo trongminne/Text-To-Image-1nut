@@ -5,7 +5,7 @@ import os
 current_translation = {}
 localization_root = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'language')
 
-def localization_js(filename, components):
+def localization_js(components):
     global current_translation
 
     if isinstance(filename, str):
