@@ -1,103 +1,103 @@
 [
     {
-        "name": "phim-điện-ảnh-diva",
-        "prompt": "UHD, 8K, siêu chi tiết, một bức ảnh điện ảnh của {prompt}, ánh sáng đẹp, cấu trúc tuyệt vời",
-        "negative_prompt": "xấu, biến dạng, nhiễu, mờ, NSFW"
+        "name": "cinematic-diva",
+        "prompt": "UHD, 8K, ultra detailed, a cinematic photograph of {prompt}, beautiful lighting, great composition",
+        "negative_prompt": "ugly, deformed, noisy, blurry, NSFW"
     },
     {
-        "name": "Trừu tượng Biểu hiện",
-        "prompt": "Nghệ thuật Trừu tượng Biểu hiện, {prompt}, tương phản cao, tối giản, nhiều màu sắc, rõ ràng, ấn tượng, biểu hiện",
-        "negative_prompt": "xấu, biến dạng, nhiễu, mờ, ít tương phản, hiện thực, chân dung hiện thực"
+        "name": "Abstract Expressionism",
+        "prompt": "Abstract Expressionism Art, {prompt}, High contrast, minimalistic, colorful, stark, dramatic, expressionism",
+        "negative_prompt": "ugly, deformed, noisy, blurry, low contrast, realism, photorealistic"
     },
     {
-        "name": "Học viện",
-        "prompt": "Học viện, {prompt}, phong cách Ivy League thanh lịch, rõ ràng, ấn tượng, trường nội trú thanh lịch, học viện",
-        "negative_prompt": "xấu, biến dạng, nhiễu, mờ, ít tương phản, grunge, lôi thô, ngổn ngang"
+        "name": "Academia",
+        "prompt": "Academia, {prompt}, preppy Ivy League style, stark, dramatic, chic boarding school, academia",
+        "negative_prompt": "ugly, deformed, noisy, blurry, low contrast, grunge, sloppy, unkempt"
     },
     {
-        "name": "Búp bê hành động",
-        "prompt": "Búp bê hành động, {prompt}, búp bê hành động thu thập, đồ chơi búp bê hành động thu thập",
-        "negative_prompt": "xấu, biến dạng, nhiễu, mờ, ít tương phản"
+        "name": "Action Figure",
+        "prompt": "Action Figure, {prompt}, plastic collectable action figure, collectable toy action figure",
+        "negative_prompt": "ugly, deformed, noisy, blurry, low contrast"
     },
     {
-        "name": "Nhân vật 3D dễ thương",
-        "prompt": "Nhân vật 3D dễ thương, {prompt}, render 3D, nhân vật dễ thương, nghệ thuật 3D",
-        "negative_prompt": "xấu, biến dạng, nhiễu, mờ, ít tương phản, grunge, lôi thô, ngổn ngang, ảnh, hình ảnh, hiện thực"
+        "name": "Adorable 3D Character",
+        "prompt": "Adorable 3D Character, {prompt}, 3D render, adorable character, 3D art",
+        "negative_prompt": "ugly, deformed, noisy, blurry, low contrast, grunge, sloppy, unkempt, photograph, photo, realistic"
     },
     {
-        "name": "Dễ thương Kawaii",
-        "prompt": "Dễ thương Kawaii, {prompt}, đẹp, dễ thương, dễ thương, Kawaii",
-        "negative_prompt": "xấu, biến dạng, nhiễu, mờ, ít tương phản, gothic, tối tăm, buồn bã, đơn sắc"
+        "name": "Adorable Kawaii",
+        "prompt": "Adorable Kawaii, {prompt}, pretty, cute, adorable, kawaii",
+        "negative_prompt": "ugly, deformed, noisy, blurry, low contrast, gothic, dark, moody, monochromatic"
     },
     {
-        "name": "Nghệ thuật Deco",
-        "prompt": "Nghệ thuật Deco, {prompt}, hình dạng hình học mạnh mẽ, đường nét sạch sẽ, màu sắc cơ bản, Nghệ thuật Deco",
-        "negative_prompt": "xấu, biến dạng, nhiễu, mờ, ít tương phản"
+        "name": "Art Deco",
+        "prompt": "Art Deco, {prompt}, sleek, geometric forms, art deco style",
+        "negative_prompt": "ugly, deformed, noisy, blurry, low contrast"
     },
     {
-        "name": "Nghệ thuật Nouveau",
-        "prompt": "Nghệ thuật Nouveau, nghệ thuật đẹp, {prompt}, hình dạng hữu cơ mạch lạc, dài, uốn lượn, phong cách nghệ thuật Nouveau",
-        "negative_prompt": "xấu, biến dạng, nhiễu, mờ, ít tương phản, công nghiệp, cơ khí"
+        "name": "Art Nouveau",
+        "prompt": "Art Nouveau, beautiful art, {prompt}, sleek, organic forms, long, sinuous, art nouveau style",
+        "negative_prompt": "ugly, deformed, noisy, blurry, low contrast, industrial, mechanical"
     },
     {
-        "name": "Tầm nhìn thiên hà",
-        "prompt": "Tầm nhìn thiên hà, {prompt}, tầm nhìn thiên hà, ngọc lục bảo màu sắc, năng lượng sôi động",
-        "negative_prompt": "xấu, biến dạng, nhiễu, mờ, ít tương phản"
+        "name": "Astral Aura",
+        "prompt": "Astral Aura, {prompt}, astral, colorful aura, vibrant energy",
+        "negative_prompt": "ugly, deformed, noisy, blurry, low contrast"
     },
     {
         "name": "Avant-garde",
-        "prompt": "Avant-garde, {prompt}, khác thường, thử nghiệm, nghệ thuật Avant-garde",
-        "negative_prompt": "xấu, biến dạng, nhiễu, mờ, ít tương phản"
+        "prompt": "Avant-garde, {prompt}, unusual, experimental, avant-garde art",
+        "negative_prompt": "ugly, deformed, noisy, blurry, low contrast"
     },
     {
         "name": "Baroque",
-        "prompt": "Nghệ thuật Baroque, {prompt}, ấn tượng, hùng vĩ, tráng lệ, nghệ thuật Baroque",
-        "negative_prompt": "xấu, biến dạng, nhiễu, mờ, ít tương phản"
+        "prompt": "Baroque, {prompt}, dramatic, exuberant, grandeur, baroque art",
+        "negative_prompt": "ugly, deformed, noisy, blurry, low contrast"
     },
     {
-        "name": "Áp dụng Bảo mật-Style Poster",
-        "prompt": "Áp dụng Bảo mật-Style Poster, {prompt}, hình dạng hình học đơn giản, đường nét sạch sẽ, màu sắc chủ yếu, Áp dụng Bảo mật-Style Poster",
-        "negative_prompt": "xấu, biến dạng, nhiễu, mờ, ít tương phản"
+        "name": "Bauhaus-Style Poster",
+        "prompt": "Bauhaus-Style Poster, {prompt}, simple geometric shapes, clean lines, primary colors, Bauhaus-Style Poster",
+        "negative_prompt": "ugly, deformed, noisy, blurry, low contrast"
     },
     {
-        "name": "Bản vẽ Kế hoạch Sơ đồ",
-        "prompt": "Bản vẽ Kế hoạch Sơ đồ, {prompt}, bản vẽ kỹ thuật, kế hoạch sơ đồ",
-        "negative_prompt": "xấu, biến dạng, nhiễu, mờ, ít tương phản"
+        "name": "Blueprint Schematic Drawing",
+        "prompt": "Blueprint Schematic Drawing, {prompt}, technical drawing, blueprint, schematic",
+        "negative_prompt": "ugly, deformed, noisy, blurry, low contrast"
     },
     {
-        "name": "Châm biếm",
-        "prompt": "Châm biếm, {prompt}, cường điệu, hài hước, châm biếm",
-        "negative_prompt": "xấu, biến dạng, nhiễu, mờ, ít tương phản, hiện thực"
+        "name": "Caricature",
+        "prompt": "Caricature, {prompt}, exaggerated, comical, caricature",
+        "negative_prompt": "ugly, deformed, noisy, blurry, low contrast, realistic"
     },
     {
-        "name": "Nghệ thuật Cel Shaded",
-        "prompt": "Nghệ thuật Cel Shaded, {prompt}, 2D, màu phẳng, toon shading, phong cách cel shaded",
-        "negative_prompt": "xấu, biến dạng, nhiễu, mờ, ít tương phản"
+        "name": "Cel Shaded Art",
+        "prompt": "Cel Shaded Art, {prompt}, 2D, flat color, toon shading, cel shaded style",
+        "negative_prompt": "ugly, deformed, noisy, blurry, low contrast"
     },
     {
-        "name": "Bảng Thiết kế Nhân vật",
-        "prompt": "Bảng Thiết kế Nhân vật, {prompt}, bảng tham chiếu nhân vật, xoay quanh nhân vật",
-        "negative_prompt": "xấu, biến dạng, nhiễu, mờ, ít tương phản"
+        "name": "Character Design Sheet",
+        "prompt": "Character Design Sheet, {prompt}, character reference sheet, character turn around",
+        "negative_prompt": "ugly, deformed, noisy, blurry, low contrast"
     },
     {
-        "name": "Nghệ thuật Cổ điển",
-        "prompt": "Nghệ thuật Cổ điển, {prompt}, được truyền cảm hứng từ văn hóa La Mã và Hy Lạp, rõ ràng, hòa hợp, nghệ thuật cổ điển",
-        "negative_prompt": "xấu, biến dạng, nhiễu, mờ, ít tương phản"
+        "name": "Classicism Art",
+        "prompt": "Classicism Art, {prompt}, inspired by Roman and Greek culture, clarity, harmonious, classicism art",
+        "negative_prompt": "ugly, deformed, noisy, blurry, low contrast"
     },
     {
-        "name": "Nghệ thuật Trường màu",
-        "prompt": "Nghệ thuật Trường màu, {prompt}, trừu tượng, đơn giản, hình học, phong cách nghệ thuật trường màu",
-        "negative_prompt": "xấu, biến dạng, nhiễu, mờ, ít tương phản"
+        "name": "Color Field Painting",
+        "prompt": "Color Field Painting, {prompt}, abstract, simple, geometic, color field painting style",
+        "negative_prompt": "ugly, deformed, noisy, blurry, low contrast"
     },
     {
-        "name": "Nghệ thuật Bút màu",
-        "prompt": "Nghệ thuật Bút màu, {prompt}, đường nét bút màu, màu nhạt, kết cấu giấy rõ ràng, nghệ thuật bút màu",
-        "negative_prompt": "xấu, biến dạng, nhiễu, mờ, ít tương phản"
+        "name": "Colored Pencil Art",
+        "prompt": "Colored Pencil Art, {prompt}, colored pencil strokes, light color, visible paper texture, colored pencil art",
+        "negative_prompt": "ugly, deformed, noisy, blurry, low contrast"
     },
     {
-        "name": "Nghệ thuật Khái niệm",
-        "prompt": "Nghệ thuật Khái niệm, {prompt}, nghệ thuật khái niệm",
-        "negative_prompt": "xấu, biến dạng, nhiễu, mờ, ít tương phản"
+        "name": "Conceptual Art",
+        "prompt": "Conceptual Art, {prompt}, concept art",
+        "negative_prompt": "ugly, deformed, noisy, blurry, low contrast"
     },
     {
         "name": "Constructivism",
