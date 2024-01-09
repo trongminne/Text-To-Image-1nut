@@ -715,7 +715,7 @@ def worker():
             done_steps = current_task_id * steps + step
             async_task.yields.append(['preview', (
                 int(15.0 + 85.0 * float(done_steps) / float(all_steps)),
-                f'Bước {step}/{total_steps} trong việc Lấy mẫu thứ {current_task_id + 1}',
+                f'Bước {step}/{total_steps} trong việc tạo ảnh thứ {current_task_id + 1}',
                 y)])
 
         for current_task_id, task in enumerate(tasks):
