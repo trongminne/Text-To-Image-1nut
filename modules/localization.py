@@ -19,6 +19,34 @@ def localization_js(filename):
                     for k, v in current_translation.items():
                         assert isinstance(k, str)
                         assert isinstance(v, str)
+                    # Lặp qua từng component và thay thế các trường thông tin bằng phiên bản dịch (nếu có)
+                    for c in components:
+                        label = getattr(c, 'label', None)
+                        value = getattr(c, 'value', None)
+                        choices = getattr(c, 'choices', None)
+                        info = getattr(c, 'info', None)
+
+                        # Dịch label
+                        if label and label in current_translation:
+                            setattr(c, 'label', current_translation[label])
+
+                        # Dịch value
+                        if value and value in current_translation:
+                            setattr(c, 'value', current_translation[value])
+
+                        # Dịch choices
+                        if choices and isinstance(choices, list):
+                            new_choices = []
+                            for choice in choices:
+                                if choice and choice in current_translation:
+                                    new_choices.append(current_translation[choice])
+                                else:
+                                    new_choices.append(choice)
+                            setattr(c, 'choices', new_choices)
+
+                        # Dịch info
+                        if info and info in current_translation:
+                            setattr(c, 'info', current_translation[info])
                 print('Debug: File loaded successfully.')  # Thêm dòng này
             except Exception as e:
                 print(str(e))
@@ -59,13 +87,5 @@ def dump_english_config(components):
 
     with open(full_name, "w", encoding="utf-8") as json_file:
         json.dump(config_dict, json_file, indent=4)
-    # In ra nội dung của en.json ngay sau khi ghi
-    try:
-        with open(full_name, encoding='utf-8') as f:
-            en_json_content = json.load(f)
-            print('Content of en.json after writing:')
-            print(json.dumps(en_json_content, indent=4))
-    except Exception as e:
-        print(str(e))
-        print(f'Failed to read en.json file: {full_name}')
+
     return
