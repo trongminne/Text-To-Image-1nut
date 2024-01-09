@@ -33,7 +33,7 @@ default_parameters = {
 }  # dừng, trọng số
 
 inpaint_engine_versions = ['Không có', 'v1', 'v2.5', 'v2.6']
-performance_selections = ['Tốc độ', 'Chất lượng', 'Tốc độ cực kỳ']
+performance_selections = ['Speed', 'Quality', 'Extreme Speed']
 
 inpaint_option_default = 'Vẽ lại hoặc Xoá bỏ (mặc định)'
 inpaint_option_detail = 'Cải thiện chi tiết (khuôn mặt, tay, mắt, v.v.)'
