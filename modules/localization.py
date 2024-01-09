@@ -29,6 +29,7 @@ def localization_js(filename):
 
 
 def dump_english_config(components):
+    print('trongmin')
     all_texts = []
     for c in components:
         label = getattr(c, 'label', None)
@@ -50,7 +51,7 @@ def dump_english_config(components):
                     for y in x:
                         if isinstance(y, str):
                             all_texts.append(y)
-    print('trongmin')
+
     config_dict = {k: k for k in all_texts if k != "" and 'progress-container' not in k}
     full_name = os.path.abspath(os.path.join(localization_root, 'en.json'))
 
