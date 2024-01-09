@@ -528,8 +528,9 @@ with shared.gradio_root:
 
         state_is_generating = gr.State(False)
 
-        def parse_meta(raw_prompt_txt, is_generating):
-            print("Giá trị mới của prompt:", translate_text(raw_prompt_txt))
+        def parse_meta(raw_prompt_txt_vn, is_generating):
+            print("prompt_en:", translate_text(raw_prompt_txt_vn))
+            raw_prompt_txt = translate_text(raw_prompt_txt_vn)
             loaded_json = None
             try:
                 if '{' in raw_prompt_txt:
