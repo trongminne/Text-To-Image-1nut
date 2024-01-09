@@ -7,6 +7,7 @@ localization_root = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'la
 
 
 def localization_js(filename):
+    print('min - localization_js')
     global current_translation
 
     if isinstance(filename, str):
@@ -29,7 +30,6 @@ def localization_js(filename):
 
 
 def dump_english_config(components):
-    print('trongmin')
     all_texts = []
     for c in components:
         label = getattr(c, 'label', None)
