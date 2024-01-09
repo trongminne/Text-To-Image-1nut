@@ -528,15 +528,16 @@ with shared.gradio_root:
 
         state_is_generating = gr.State(False)
 
-        def parse_meta(raw_prompt_txt_vn, is_generating):
-            print("prompt_en:", translate_text(raw_prompt_txt_vn))
-            raw_prompt_txt = translate_text(raw_prompt_txt_vn)
+        def parse_meta(raw_prompt_txt, is_generating):
+            translated_prompt = translate_text(raw_prompt_txt)
+            print("Giá trị mới của prompt:", translated_prompt)
+
             loaded_json = None
             try:
-                if '{' in raw_prompt_txt:
-                    if '}' in raw_prompt_txt:
-                        if ':' in raw_prompt_txt:
-                            loaded_json = json.loads(raw_prompt_txt)
+                if '{' in translated_prompt:
+                    if '}' in translated_prompt:
+                        if ':' in translated_prompt:
+                            loaded_json = json.loads(translated_prompt)
                             assert isinstance(loaded_json, dict)
             except:
                 loaded_json = None
@@ -548,6 +549,7 @@ with shared.gradio_root:
                     return gr.update(), gr.update(visible=True), gr.update(visible=False)
 
             return json.dumps(loaded_json), gr.update(visible=False), gr.update(visible=True)
+
 
         prompt.input(parse_meta, inputs=[prompt, state_is_generating], outputs=[prompt, generate_button, load_parameter_button], queue=False, show_progress=False)
 
