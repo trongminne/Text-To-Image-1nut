@@ -27,94 +27,8 @@ def localization_js(filename):
 
     return f"window.localization = {json.dumps(current_translation)}"
 
-def en_to_vn(filename, components):
-    global current_translation
-
-    if isinstance(filename, str):
-        full_name = os.path.abspath(os.path.join(localization_root, filename + '.json'))
-        print('Debug: Trying to load file:', full_name)
-        if os.path.exists(full_name):
-            try:
-                with open(full_name, encoding='utf-8') as f:
-                    current_translation = json.load(f)
-                    assert isinstance(current_translation, dict)
-
-                    for k, v in current_translation.items():
-                        assert isinstance(k, str)
-                        assert isinstance(v, str)
-
-                    # Kiểm tra trùng lặp giữa các khóa trong file en.json và trong mã nguồn
-                    for c in components:
-                        label = getattr(c, 'label', None)
-                        value = getattr(c, 'value', None)
-                        choices = getattr(c, 'choices', None)
-                        info = getattr(c, 'info', None)
-
-                        # Kiểm tra label
-                        if label and label in current_translation.values():
-                            raise ValueError(f'Duplicate label in en.json: {label}')
-
-                        # Kiểm tra value
-                        if value and value in current_translation.values():
-                            raise ValueError(f'Duplicate value in en.json: {value}')
-
-                        # Kiểm tra choices
-                        if choices and isinstance(choices, list):
-                            for choice in choices:
-                                if choice and choice in current_translation.values():
-                                    raise ValueError(f'Duplicate choice in en.json: {choice}')
-
-                        # Kiểm tra info
-                        if info and info in current_translation.values():
-                            raise ValueError(f'Duplicate info in en.json: {info}')
-
-                    # Lặp qua từng component và thay thế các trường thông tin bằng phiên bản dịch (nếu có)
-                    for c in components:
-                        label = getattr(c, 'label', None)
-                        value = getattr(c, 'value', None)
-                        choices = getattr(c, 'choices', None)
-                        info = getattr(c, 'info', None)
-
-                        # Dịch label
-                        if label and label in current_translation:
-                            translated_label = current_translation[label]
-                            setattr(c, 'label', translated_label)
-                            print(f"Translated label: {label} -> {translated_label}")
-
-                        # Dịch value
-                        if value and value in current_translation:
-                            translated_value = current_translation[value]
-                            setattr(c, 'value', translated_value)
-                            print(f"Translated value: {value} -> {translated_value}")
-
-                        # Dịch choices
-                        if choices and isinstance(choices, list):
-                            new_choices = []
-                            for choice in choices:
-                                if choice and choice in current_translation:
-                                    translated_choice = current_translation[choice]
-                                    new_choices.append(translated_choice)
-                                    print(f"Translated choice: {choice} -> {translated_choice}")
-                                else:
-                                    new_choices.append(choice)
-                            setattr(c, 'choices', new_choices)
-
-                        # Dịch info
-                        if info and info in current_translation:
-                            translated_info = current_translation[info]
-                            setattr(c, 'info', translated_info)
-                            print(f"Translated info: {info} -> {translated_info}")
-                    print('Debug: File loaded successfully.')
-            except Exception as e:
-                print(str(e))
-                print(f'Failed to load localization file {full_name}')
-                return
-
-    return f"window.localization = {json.dumps(current_translation)}"
-
 
 def dump_english_config(components):
-
     all_texts = []
     for c in components:
         label = getattr(c, 'label', None)
@@ -138,10 +52,7 @@ def dump_english_config(components):
                             all_texts.append(y)
 
     config_dict = {k: k for k in all_texts if k != "" and 'progress-container' not in k}
-    filename = 'en'
-    full_name = os.path.abspath(os.path.join(localization_root, f'{filename}.json'))
-    print('path en: ', full_name)
-    en_to_vn(filename, components)
+    full_name = os.path.abspath(os.path.join(localization_root, 'en.json'))
 
     with open(full_name, "w", encoding="utf-8") as json_file:
         json.dump(config_dict, json_file, indent=4)
