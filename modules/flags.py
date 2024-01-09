@@ -1,5 +1,5 @@
-disabled = 'Tắt'
-enabled = 'Bật'
+disabled = 'Disabled'
+enabled = 'Enabled'
 subtle_variation = 'Biến đổi nhẹ'
 strong_variation = 'Biến đổi mạnh'
 upscale_15 = 'Phóng lớn (1.5x)'
