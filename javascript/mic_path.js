@@ -94,11 +94,6 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
         const confirmButton = document.querySelector(".swal2-confirm");
         if (confirmButton) {
             confirmButton.click();
-            // Lấy tham chiếu đến phần tử <textarea>
-            var textareaElement = document.querySelector('[data-testid="textbox"]');
-
-            textareaElement.value = recordedText;
-            console.log('value: ' + textareaElement.value)
             document.getElementById("generate_button").click();
         }
     }
