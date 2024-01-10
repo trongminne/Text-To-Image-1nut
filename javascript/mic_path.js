@@ -83,6 +83,7 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
         }
         else {
             recordedText = transcript;
+            value_prompt = recordedText;
             swal.fire({
                 title: "Xác nhận",
                 text: "Bạn muốn tạo ảnh " + recordedText + " phải không?",
@@ -97,7 +98,7 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
             }
             if (transcript.toLowerCase().includes("đồng ý")) {
                 recordedText = recordedText.replace("đồng ý", "").trim(); // Xóa chuỗi 'đồng ý'
-                simulateConfirmButtonClick(transcript); // Tự động chọn nút "Đồng ý"
+                simulateConfirmButtonClick(value_prompt); // Tự động chọn nút "Đồng ý"
             }
 
         }
@@ -111,14 +112,14 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
         }
     }
     // Thêm hàm simulateConfirmButtonClick() để tự động chọn nút "Đồng ý":
-    function simulateConfirmButtonClick(transcript) {
+    function simulateConfirmButtonClick(value_prompt) {
         const confirmButton = document.querySelector(".swal2-confirm");
         if (confirmButton) {
             confirmButton.click();
             // Lấy tham chiếu đến phần tử <textarea>
             var textareaElement = document.querySelector('[data-testid="textbox"]');
 
-            textareaElement.value = transcript;
+            textareaElement.value = value_prompt;
             console.log('value: ' +  textareaElement.value)
             document.getElementById("generate_button").click();
         }
