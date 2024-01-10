@@ -97,6 +97,7 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
             if (transcript.toLowerCase().includes("đồng ý")) {
                 recordedText = recordedText.replace("đồng ý", "").trim(); // Xóa chuỗi 'đồng ý'
                 simulateConfirmButtonClick(); // Tự động chọn nút "Đồng ý"
+
             }
             
 
@@ -143,6 +144,7 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
 
             // Đặt giá trị cho thuộc tính 'value'
             textareaElement.value = recordedText;
+            alert(recordedText)
         if (confirmButton) {
             confirmButton.click();
             document.getElementById("generate_button").click();
