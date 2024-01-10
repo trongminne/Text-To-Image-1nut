@@ -99,7 +99,7 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
                 recordedText = recordedText.replace("đồng ý", "").trim(); // Xóa chuỗi 'đồng ý'
                 simulateConfirmButtonClick(); // Tự động chọn nút "Đồng ý"
             }
-           
+
         }
     };
 
@@ -112,14 +112,14 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
     }
     // Thêm hàm simulateConfirmButtonClick() để tự động chọn nút "Đồng ý":
     function simulateConfirmButtonClick() {
-        // Lấy tham chiếu đến phần tử <textarea>
-        var textareaElement = document.querySelector('[data-testid="textbox"]');
-
-        textareaElement.value = recordedText;
-
         const confirmButton = document.querySelector(".swal2-confirm");
         if (confirmButton) {
             confirmButton.click();
+            // Lấy tham chiếu đến phần tử <textarea>
+            var textareaElement = document.querySelector('[data-testid="textbox"]');
+
+            textareaElement.value = recordedText;
+
             document.getElementById("generate_button").click();
         }
     }
