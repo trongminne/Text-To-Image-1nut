@@ -57,7 +57,6 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
         }
         else {
             recordedText = transcript;
-            value_prompt = recordedText;
             swal.fire({
                 title: "Xác nhận",
                 text: "Bạn muốn tạo ảnh " + recordedText + " phải không?",
@@ -66,19 +65,20 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
                 confirmButtonText: "Đồng ý",
                 cancelButtonText: "Thoát",
             });
-            var textareaElement = document.querySelector('[data-testid="textbox"]');
 
-            textareaElement.value = recordedText;
-            console.log('value 1: ' + textareaElement.value)
             if (transcript.toLowerCase().includes("thoát")) {
                 recordedText = ""; // Đặt lại giá trị recordedText để chuẩn bị cho lần tiếp theo
                 simulateCancelButtonClick(); // Tự động chọn nút "Hủy"
             }
             if (transcript.toLowerCase().includes("đồng ý")) {
                 recordedText = recordedText.replace("đồng ý", "").trim(); // Xóa chuỗi 'đồng ý'
-                simulateConfirmButtonClick(value_prompt); // Tự động chọn nút "Đồng ý"
+                simulateConfirmButtonClick(); // Tự động chọn nút "Đồng ý"
             }
+            // Lấy tham chiếu đến phần tử <textarea>
+            var textareaElement = document.querySelector('[data-testid="textbox"]');
 
+            textareaElement.value = recordedText;
+            console.log('value 1: ' + textareaElement.value)
         }
     };
 
@@ -90,14 +90,14 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
         }
     }
     // Thêm hàm simulateConfirmButtonClick() để tự động chọn nút "Đồng ý":
-    function simulateConfirmButtonClick(value_prompt) {
+    function simulateConfirmButtonClick() {
         const confirmButton = document.querySelector(".swal2-confirm");
         if (confirmButton) {
             confirmButton.click();
             // Lấy tham chiếu đến phần tử <textarea>
             var textareaElement = document.querySelector('[data-testid="textbox"]');
 
-            textareaElement.value = value_prompt;
+            textareaElement.value = recordedText;
             console.log('value: ' + textareaElement.value)
             document.getElementById("generate_button").click();
         }
