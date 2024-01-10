@@ -99,11 +99,7 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
                 recordedText = recordedText.replace("đồng ý", "").trim(); // Xóa chuỗi 'đồng ý'
                 simulateConfirmButtonClick(); // Tự động chọn nút "Đồng ý"
             }
-            // Lấy tham chiếu đến phần tử <textarea>
-            var textareaElement = document.querySelector('[data-testid="textbox"]');
-
-            textareaElement.value = recordedText;
-
+           
         }
     };
 
