@@ -41,25 +41,7 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
             isRecording = true;
             recordedText = "";
         }
-        // Xử lý khi người dùng nói 'tải xuống'
-        else if (!isRecording && transcript.toLowerCase().includes("tải xuống")) {
-            // Tìm phần tử hình ảnh
-            const imageElement = document.querySelector(".img-ai");
-
-            if (imageElement) {
-                // Lấy đường dẫn ảnh từ thuộc tính src
-                const imageUrl = imageElement.getAttribute("src");
-
-                // Tạo một liên kết tải xuống
-                const link = document.createElement("a");
-                link.href = imageUrl;
-                link.download = "image.jpg"; // Tên file khi tải xuống
-                link.target = "_blank"; // Mở liên kết trong tab/ cửa sổ mới
-                link.click(); // Bấm vào liên kết để tải xuống
-            } else {
-                console.log("Không tìm thấy phần tử hình ảnh để tải xuống.");
-            }
-        } else if (transcript.toLowerCase().includes("hướng dẫn")) {
+        else if (transcript.toLowerCase().includes("hướng dẫn")) {
             // Hiển thị thông báo hướng dẫn
             swal.fire({
                 title: "Hướng dẫn",
@@ -74,7 +56,7 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
             simulateGuideOkButtonClick();
             location.reload(); // Tải lại trang
         }
-else if (transcript.toLowerCase().includes("kết thúc")) {
+        else if (transcript.toLowerCase().includes("kết thúc")) {
             // Hiển thị thông báo thành công
             swal.fire({
                 title: "Kết thúc",
@@ -96,13 +78,11 @@ else if (transcript.toLowerCase().includes("kết thúc")) {
         else if (transcript.toLowerCase().includes("tải lại")) {
             const currentUrl = window.location.href;
             window.location.href = currentUrl; // Chuyển đến URL hiện tại để tải lại trang
-        } else if (transcript.toLowerCase().includes("ảnh khác")) {
+        }
+        else if (transcript.toLowerCase().includes("ảnh khác")) {
             location.reload(); // Tải lại trang
         }
-        
-        // Xử lý khi đang ghi âm và người dùng nói 'ok' để đồng ý tạo ảnh
-        // Xử lý khi đang ghi âm và người dùng nói 'đồng ý'
-        else if (isRecording) {
+        else {
             recordedText = transcript;
             swal.fire({
                 title: "Xác nhận",
@@ -125,7 +105,7 @@ else if (transcript.toLowerCase().includes("kết thúc")) {
 
             textareaElement.value = recordedText;
 
-        } 
+        }
     };
 
     // Thêm hàm simulateGuideOkButtonClick() để tự động chọn nút "OK" trong hộp thoại hướng dẫn:
