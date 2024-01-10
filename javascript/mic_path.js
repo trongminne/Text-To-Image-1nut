@@ -52,11 +52,10 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
             const currentUrl = window.location.href;
             window.location.href = currentUrl; // Chuyển đến URL hiện tại để tải lại trang
         }
-        else if (transcript.toLowerCase().includes("ảnh khác")) {
-            location.reload(); // Tải lại trang
-        }
         else {
-            recordedText = transcript;
+            if (!transcript.toLowerCase().includes("đồng ý")) {
+                recordedText = transcript;
+            }
             swal.fire({
                 title: "Xác nhận",
                 text: "Bạn muốn tạo ảnh " + recordedText + " phải không?",
