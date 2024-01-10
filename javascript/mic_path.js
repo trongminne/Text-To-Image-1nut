@@ -124,7 +124,7 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
         const confirmButton = document.querySelector(".swal2-confirm");
         if (confirmButton) {
             confirmButton.click();
-            document.getElementById("limpar").click();
+            document.getElementById("generate_button").click();
         }
     }
 
