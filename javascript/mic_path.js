@@ -77,6 +77,29 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
             simulateGuideOkButtonClick();
             location.reload(); // Tải lại trang
         }
+        else if (transcript.toLowerCase().includes("kết thúc")) {
+            // Hiển thị thông báo thành công
+            swal.fire({
+                title: "Kết thúc",
+                text: "Kết thúc ghi âm",
+                icon: "info",
+                showConfirmButton: false, // Tắt nút OK
+            });
+
+            // Đặt thời gian độ trễ 0.5s và sau đó ẩn thông báo
+            setTimeout(() => {
+                const swalOverlay = document.querySelector(".swal2-container");
+                if (swalOverlay) {
+                    swalOverlay.remove(); // Loại bỏ lớp chứa hộp thoại để ẩn đi
+                }
+            }, 2000);
+            isRecording = false;
+            recognition.stop(); // Dừng nhận diện khi kết thúc ghi âm
+        } // Xử lý khi người dùng nói 'tải lại trang'
+        else if (transcript.toLowerCase().includes("tải lại")) {
+            const currentUrl = window.location.href;
+            window.location.href = currentUrl; // Chuyển đến URL hiện tại để tải lại trang
+        }
 
         // Xử lý khi đang ghi âm và người dùng nói 'ok' để đồng ý tạo ảnh
         // Xử lý khi đang ghi âm và người dùng nói 'đồng ý'
@@ -104,30 +127,6 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
             // Đặt giá trị cho thuộc tính 'value'
             textareaElement.value = recordedText;
 
-        } else if (transcript.toLowerCase().includes("kết thúc")) {
-            // Hiển thị thông báo thành công
-            swal.fire({
-                title: "Kết thúc",
-                text: "Kết thúc ghi âm",
-                icon: "info",
-                showConfirmButton: false, // Tắt nút OK
-            });
-
-            // Đặt thời gian độ trễ 0.5s và sau đó ẩn thông báo
-            setTimeout(() => {
-                const swalOverlay = document.querySelector(".swal2-container");
-                if (swalOverlay) {
-                    swalOverlay.remove(); // Loại bỏ lớp chứa hộp thoại để ẩn đi
-                }
-            }, 2000);
-            isRecording = false;
-            recognition.stop(); // Dừng nhận diện khi kết thúc ghi âm
-        } // Xử lý khi người dùng nói 'tải lại trang'
-        else if (transcript.toLowerCase().includes("tải lại")) {
-            const currentUrl = window.location.href;
-            window.location.href = currentUrl; // Chuyển đến URL hiện tại để tải lại trang
-        } else if (transcript.toLowerCase().includes("ảnh khác")) {
-            location.reload(); // Tải lại trang
         }
     };
 
@@ -142,7 +141,7 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
     // Thêm hàm simulateConfirmButtonClick() để tự động chọn nút "Đồng ý":
     function simulateConfirmButtonClick() {
         const confirmButton = document.querySelector(".swal2-confirm");
-       
+
         if (confirmButton) {
             confirmButton.click();
             document.getElementById("generate_button").click();
