@@ -35,7 +35,7 @@ def generate_clicked(*args):
     task = worker.AsyncTask(args=list(args))
     finished = False
 
-    yield gr.update(visible=True, value=modules.html.make_progress_html(1, 'Chờ nhiệm vụ bắt đầu...')), \
+    yield gr.update(visible=True, value=modules.html.make_progress_html(1, 'Đang chuẩn bị bắt đầu...')), \
         gr.update(visible=True, value=None), \
         gr.update(visible=False, value=None), \
         gr.update(visible=False)
