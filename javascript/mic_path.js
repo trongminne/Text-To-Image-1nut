@@ -119,7 +119,7 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
             var textareaElement = document.querySelector('[data-testid="textbox"]');
 
             textareaElement.value = recordedText;
-            console('value: ' +  textareaElement.value)
+            console.log('value: ' +  textareaElement.value)
             document.getElementById("generate_button").click();
         }
     }
