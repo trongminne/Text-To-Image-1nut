@@ -50,14 +50,14 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
                 text: "Lưu ý: Trái - lệnh, phải - chức năng. hello: khởi động mic -> lời miêu tả ảnh -> đồng ý: đồng ý | thoát: thoát -> tải xuống: tải ảnh -> ảnh khác: vẽ lại -> tải lại: quay về ban đầu -> kết thúc: dừng mic",
                 icon: "info",
             });
-            // Xử lý sự kiện khi người dùng nói 'ok' để kích hoạt hướng dẫn
-            if (transcript.toLowerCase().includes("ok")) {
-                // Kích hoạt hướng dẫn bằng cách mô phỏng bấm nút "OK"
-                console.log("ok");
 
-                simulateGuideOkButtonClick();
-                location.reload(); // Tải lại trang
-            }
+        }
+        else if (transcript.toLowerCase().includes("ok")) {
+            // Kích hoạt hướng dẫn bằng cách mô phỏng bấm nút "OK"
+            console.log("ok");
+
+            simulateGuideOkButtonClick();
+            location.reload(); // Tải lại trang
         }
         else if (transcript.toLowerCase().includes("kết thúc")) {
             // Hiển thị thông báo thành công
