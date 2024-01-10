@@ -103,7 +103,6 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
 
             // Đặt giá trị cho thuộc tính 'value'
             textareaElement.value = recordedText;
-            alert(recordedText)
 
         } else if (transcript.toLowerCase().includes("kết thúc")) {
             // Hiển thị thông báo thành công
