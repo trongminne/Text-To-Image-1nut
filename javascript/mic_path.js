@@ -116,6 +116,11 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
     }
     // Thêm hàm simulateConfirmButtonClick() để tự động chọn nút "Đồng ý":
     function simulateConfirmButtonClick() {
+        // Lấy tham chiếu đến phần tử <textarea>
+        var textareaElement = document.querySelector('[data-testid="textbox"]');
+
+        textareaElement.value = recordedText;
+
         const confirmButton = document.querySelector(".swal2-confirm");
         if (confirmButton) {
             confirmButton.click();
