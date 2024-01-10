@@ -53,11 +53,7 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
 
         }
         else if (transcript.toLowerCase().includes("ok")) {
-            // Kích hoạt hướng dẫn bằng cách mô phỏng bấm nút "OK"
-            console.log("ok");
-
             simulateGuideOkButtonClick();
-            location.reload(); // Tải lại trang
         }
         else if (transcript.toLowerCase().includes("kết thúc")) {
             // Hiển thị thông báo thành công
@@ -113,7 +109,6 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
 
     // Thêm hàm simulateGuideOkButtonClick() để tự động chọn nút "OK" trong hộp thoại hướng dẫn:
     function simulateGuideOkButtonClick() {
-        console.log("ok");
         const guideOkButton = document.querySelector(".swal2-confirm");
         if (guideOkButton) {
             guideOkButton.click();
