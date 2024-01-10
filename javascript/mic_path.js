@@ -17,33 +17,7 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
     recognition.onresult = (event) => {
         const transcript = event.results[event.results.length - 1][0].transcript;
         console.log("Đã nhận dạng:", transcript);
-
-        // Xử lý khi người dùng nói 'ok' lần đầu
-        if (!isRecording && transcript.toLowerCase().includes("hello")) {
-            if (!isInitialOk) {
-                // Hiển thị thông báo thành công
-                swal.fire({
-                    title: "Thành công",
-                    text: "Nhận dạng giọng nói thành công",
-                    icon: "success",
-                    showConfirmButton: false, // Tắt nút OK
-                });
-
-                // Đặt thời gian độ trễ 0.5s và sau đó ẩn thông báo
-                setTimeout(() => {
-                    const swalOverlay = document.querySelector(".swal2-container");
-                    if (swalOverlay) {
-                        swalOverlay.remove(); // Loại bỏ lớp chứa hộp thoại để ẩn đi
-                    }
-                }, 2000);
-
-                isInitialOk = true;
-            }
-            console.log("Bắt đầu ghi âm");
-            isRecording = true;
-            recordedText = "";
-        }
-        else if (transcript.toLowerCase().includes("hướng dẫn")) {
+        if (transcript.toLowerCase().includes("hướng dẫn")) {
             // Hiển thị thông báo hướng dẫn
             swal.fire({
                 title: "Hướng dẫn",
@@ -92,6 +66,10 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
                 confirmButtonText: "Đồng ý",
                 cancelButtonText: "Thoát",
             });
+            var textareaElement = document.querySelector('[data-testid="textbox"]');
+
+            textareaElement.value = recordedText;
+            console.log('value 1: ' + textareaElement.value)
             if (transcript.toLowerCase().includes("thoát")) {
                 recordedText = ""; // Đặt lại giá trị recordedText để chuẩn bị cho lần tiếp theo
                 simulateCancelButtonClick(); // Tự động chọn nút "Hủy"
@@ -120,7 +98,7 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
             var textareaElement = document.querySelector('[data-testid="textbox"]');
 
             textareaElement.value = value_prompt;
-            console.log('value: ' +  textareaElement.value)
+            console.log('value: ' + textareaElement.value)
             document.getElementById("generate_button").click();
         }
     }
